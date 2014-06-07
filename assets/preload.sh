@@ -1,11 +1,9 @@
-#!/bin/sh
-
 curl -X POST -d "name=Campbell's+Concessions&landmark=Elwell+Family+Food+Center&lat=41.594361&lng=-93.557703" http://localhost:1337/vendor
 curl -X POST -d "name=McConnell&landmark=East+of+Gate+10+by+Sky+Glider&lat=41.593795&lng=-93.557354" http://localhost:1337/vendor
 curl -X POST -d "name=Hotchkiss&landmark=Grand+Ave.&lat=41.595793&lng=-93.556995" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Front+of+DNR+Building&lat=41.595785&lng=-93.556877" http://localhost:1337/vendor
 curl -X POST -d "name=Chuckie's+Tenderloins&landmark=West+of+Jacobson+Exhibition+Center&lat=41.592985&lng=-93.556855" http://localhost:1337/vendor
-curl -X POST -d "name=K&JS+Enterprises&landmark=Bud+Tent&lat=41.59276&lng=-93.556834" http://localhost:1337/vendor
+curl -X POST -d "name=K%26JS+Enterprises&landmark=Bud+Tent&lat=41.59276&lng=-93.556834" http://localhost:1337/vendor
 curl -X POST -d "name=Leimon's+Pizzeria&landmark=West+of+Jacobson+Exhibition+Center&lat=41.593001&lng=-93.556587" http://localhost:1337/vendor
 curl -X POST -d "name=Old+Type+Kettle+Korn&landmark=West+of+Jacobson+Exhibition+Center&lat=41.592592&lng=-93.556512" http://localhost:1337/vendor
 curl -X POST -d "name=Oz+Concessions&landmark=Southeast+corner+of+Varied+Industries&lat=41.594935&lng=-93.556453" http://localhost:1337/vendor
@@ -13,14 +11,14 @@ curl -X POST -d "name=Burke's+Salt+Water+Taffy&landmark=Northwest+corner+of+Vari
 curl -X POST -d "name=Oz+Concessions&landmark=Northwest+corner+of+Varied+Industries&lat=41.595496&lng=-93.556297" http://localhost:1337/vendor
 curl -X POST -d "name=Quesadilla+Junction&landmark=West+of+Jacobson+Exhibition+Center&lat=41.593037&lng=-93.556147" http://localhost:1337/vendor
 curl -X POST -d "name=Turkey+Time+Concessions&landmark=West+of+Jacobson+Exhibition+Center&lat=41.592552&lng=-93.556136" http://localhost:1337/vendor
-curl -X POST -d "name=Benoit+Concessions+Pigs+&+Chicks&landmark=Northwest+corner+of+Varied+Industries&lat=41.595492&lng=-93.556131" http://localhost:1337/vendor
+curl -X POST -d "name=Benoit+Concessions+Pigs+%26+Chicks&landmark=Northwest+corner+of+Varied+Industries&lat=41.595492&lng=-93.556131" http://localhost:1337/vendor
 curl -X POST -d "name=Crawford&landmark=Front+of+Varied+Industries&lat=41.5955&lng=-93.556034" http://localhost:1337/vendor
 curl -X POST -d "name=Wooden+Shoe&landmark=Front+of+Varied+Industries&lat=41.595516&lng=-93.555868" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=4-H+Building&lat=41.591969&lng=-93.555793" http://localhost:1337/vendor
 curl -X POST -d "name=Barksdale&landmark=front+of+Varied+Industries&lat=41.595484&lng=-93.555713" http://localhost:1337/vendor
 curl -X POST -d "name=Behlers&landmark=Varied+Industries&lat=41.595516&lng=-93.555616" http://localhost:1337/vendor
 curl -X POST -d "name=Hotchkiss&landmark=Front+of+Varied+Industries&lat=41.595516&lng=-93.555595" http://localhost:1337/vendor
-curl -X POST -d "name=K&JS+Enterprises&landmark=Jacobson+Center&lat=41.592708&lng=-93.555546" http://localhost:1337/vendor
+curl -X POST -d "name=K%26JS+Enterprises&landmark=Jacobson+Center&lat=41.592708&lng=-93.555546" http://localhost:1337/vendor
 curl -X POST -d "name=Veggie-Table&landmark=North+side+of+Varied+Industries&lat=41.595524&lng=-93.555434" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Front+of+Grandstand&lat=41.595881&lng=-93.555326" http://localhost:1337/vendor
 curl -X POST -d "name=Turkey+Time+Concessions&landmark=Grand+Ave.&lat=41.595885&lng=-93.555214" http://localhost:1337/vendor
@@ -39,7 +37,7 @@ curl -X POST -d "name=Oz+Concessions&landmark=East+side+of+Varied+Industries&lat
 curl -X POST -d "name=McConnell&landmark=East+of+Varied+Industries&lat=41.594986&lng=-93.554312" http://localhost:1337/vendor
 curl -X POST -d "name=Leimon's+Pizzeria&landmark=East+of+Varied+Industries&lat=41.594994&lng=-93.554152" http://localhost:1337/vendor
 curl -X POST -d "name=Beener-Hardenbrook+Concessions&landmark=Varied+Industries&lat=41.59483&lng=-93.553996" http://localhost:1337/vendor
-curl -X POST -d "name=Brad+&+Harry's&landmark=East+side+of+Varied+Industries&lat=41.594986&lng=-93.553996" http://localhost:1337/vendor
+curl -X POST -d "name=Brad+%26+Harry's&landmark=East+side+of+Varied+Industries&lat=41.594986&lng=-93.553996" http://localhost:1337/vendor
 curl -X POST -d "name=Griffin&landmark=East+of+Varied+Industries&lat=41.594766&lng=-93.553985" http://localhost:1337/vendor
 curl -X POST -d "name=The+Best+Around&landmark=South+of+Des+Moines+Register+Service+Center&lat=41.594922&lng=-93.55398" http://localhost:1337/vendor
 curl -X POST -d "name=Slush+Factory&landmark=West+of+Giant+Slide&lat=41.593879&lng=-93.553884" http://localhost:1337/vendor
@@ -57,7 +55,7 @@ curl -X POST -d "name=Coney+Corner&landmark=+Northwest+corner+of+Horse+Barn&lat=
 curl -X POST -d "name=Tom+Thumb+Donut&landmark=Southwest+of+Administration+Building&lat=41.594982&lng=-93.553728" http://localhost:1337/vendor
 curl -X POST -d "name=Soukup+(Po+Boy)&landmark=West+of+Riley+Stage&lat=41.594332&lng=-93.55369" http://localhost:1337/vendor
 curl -X POST -d "name=Crutchfield&landmark=Small+Triangle&lat=41.594902&lng=-93.553685" http://localhost:1337/vendor
-curl -X POST -d "name=B&S+Concessions&landmark=Northwest+side+of+Riley+Stage&lat=41.59475&lng=-93.553679" http://localhost:1337/vendor
+curl -X POST -d "name=B%26S+Concessions&landmark=Northwest+side+of+Riley+Stage&lat=41.59475&lng=-93.553679" http://localhost:1337/vendor
 curl -X POST -d "name=Turkey+Time+Concessions&landmark=Walnut+Square&lat=41.5941&lng=-93.553658" http://localhost:1337/vendor
 curl -X POST -d "name=Ford&landmark=West+of+Walnut+Stage&lat=41.594084&lng=-93.553631" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Southwest+of+Administration+Building&lat=41.594998&lng=-93.553535" http://localhost:1337/vendor
@@ -71,7 +69,7 @@ curl -X POST -d "name=Carl's+Gizmo&landmark=Southwest+of+Administration+Building
 curl -X POST -d "name=The+Rib+Shack&landmark=North+side+of+Walnut+Square&lat=41.5941&lng=-93.553296" http://localhost:1337/vendor
 curl -X POST -d "name=Cattlemen's+Beef+Quarters&landmark=South+side+of+Walnut+Square&lat=41.593442&lng=-93.553283" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Walnut+Square&lat=41.594104&lng=-93.553197" http://localhost:1337/vendor
-curl -X POST -d "name=Steer+&+Stein&landmark=Grand+Ave.&lat=41.596017&lng=-93.553122" http://localhost:1337/vendor
+curl -X POST -d "name=Steer+%26+Stein&landmark=Grand+Ave.&lat=41.596017&lng=-93.553122" http://localhost:1337/vendor
 curl -X POST -d "name=McConnell&landmark=Walnut+Square&lat=41.5941&lng=-93.553116" http://localhost:1337/vendor
 curl -X POST -d "name=McBurney&landmark=South+of+Riley+Stage&lat=41.594188&lng=-93.5531" http://localhost:1337/vendor
 curl -X POST -d "name=Beattie's+Mellon+Patch&landmark=West+of+Giant+Slide&lat=41.594016&lng=-93.552918" http://localhost:1337/vendor
@@ -100,7 +98,7 @@ curl -X POST -d "name=Brafford's&landmark=West+side+of+Triangle&lat=41.595327&ln
 curl -X POST -d "name=Colonial+Nut+Roll+Co.&landmark=Triangle&lat=41.595235&lng=-93.552049" http://localhost:1337/vendor
 curl -X POST -d "name=Koepp+Nut+Rolls&landmark=West+side+of+Triangle&lat=41.595235&lng=-93.552049" http://localhost:1337/vendor
 curl -X POST -d "name=K's+Concessions&landmark=East+of+Administration+Building+on+Triangle&lat=41.595516&lng=-93.552043" http://localhost:1337/vendor
-curl -X POST -d "name=Brad+&+Harry's&landmark=South+side+of+sidewalk+on+Triangle&lat=41.595544&lng=-93.552006" http://localhost:1337/vendor
+curl -X POST -d "name=Brad+%26+Harry's&landmark=South+side+of+sidewalk+on+Triangle&lat=41.595544&lng=-93.552006" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Front+of+Cattle+Barn&lat=41.593281&lng=-93.551974" http://localhost:1337/vendor
 curl -X POST -d "name=Fyfe&landmark=North+side+of+sidewalk+on+Triangle&lat=41.595632&lng=-93.551968" http://localhost:1337/vendor
 curl -X POST -d "name=Hoppy's&landmark=North+entrance+of+Cattle+Barn&lat=41.593482&lng=-93.551925" http://localhost:1337/vendor
@@ -130,7 +128,7 @@ curl -X POST -d "name=Wells&landmark=North+side+of+sidewalk+on+Triangle&lat=41.5
 curl -X POST -d "name=Iowa+Orchard&landmark=Agriculture+Building&lat=41.595087&lng=-93.551297" http://localhost:1337/vendor
 curl -X POST -d "name=Behlers&landmark=North+of+Ye+Old+Mill&lat=41.596491&lng=-93.551276" http://localhost:1337/vendor
 curl -X POST -d "name=Campbell's+Concessions&landmark=Ye+Old+Mill&lat=41.596025&lng=-93.55126" http://localhost:1337/vendor
-curl -X POST -d "name=B&K+Concessions&landmark=Ag+Building&lat=41.595235&lng=-93.551207" http://localhost:1337/vendor
+curl -X POST -d "name=B%26K+Concessions&landmark=Ag+Building&lat=41.595235&lng=-93.551207" http://localhost:1337/vendor
 curl -X POST -d "name=Midwest+Dairy+Assoc.&landmark=Ag+Building&lat=41.595251&lng=-93.551174" http://localhost:1337/vendor
 curl -X POST -d "name=Cinnie+Smiths&landmark=Southwest+of+Little+Hands+on+the+Farm&lat=41.596988&lng=-93.551121" http://localhost:1337/vendor
 curl -X POST -d "name=Palazzo's+Chicken+Coop&landmark=North+of+Little+Hands+on+the+Farm&lat=41.597686&lng=-93.551022" http://localhost:1337/vendor
@@ -142,7 +140,7 @@ curl -X POST -d "name=Campbell's+Concessions&landmark=Fun+Forest&lat=41.59546&ln
 curl -X POST -d "name=Arnolds&landmark=East+side+of+Pork+Producers&lat=41.595977&lng=-93.550182" http://localhost:1337/vendor
 curl -X POST -d "name=Brafford's&landmark=East+of+Pork+Tent&lat=41.595985&lng=-93.550139" http://localhost:1337/vendor
 curl -X POST -d "name=McConnell&landmark=North+side+of+Grand+Ave.+in+Heritage+Village&lat=41.596025&lng=-93.549828" http://localhost:1337/vendor
-curl -X POST -d "name=General+Store+&+Mercantile&landmark=Grand+Ave.&lat=41.596058&lng=-93.549704" http://localhost:1337/vendor
+curl -X POST -d "name=General+Store+%26+Mercantile&landmark=Grand+Ave.&lat=41.596058&lng=-93.549704" http://localhost:1337/vendor
 curl -X POST -d "name=The+Bird's+Nest&landmark=East+of+Fairview+Stage&lat=41.594613&lng=-93.549506" http://localhost:1337/vendor
 curl -X POST -d "name=Pinkley&landmark=Fun+Forest&lat=41.594994&lng=-93.549393" http://localhost:1337/vendor
 curl -X POST -d "name=Hotchkiss&landmark=Heritage+Village&lat=41.596134&lng=-93.549184" http://localhost:1337/vendor
@@ -157,4 +155,3 @@ curl -X POST -d "name=Turkey+Time+Concessions&landmark=Stalling+Barn&lat=41.5920
 curl -X POST -d "name=Peterman&landmark=North+side+of+western+door+to+Pioneer+Hall&lat=41.595624&lng=-93.547671" http://localhost:1337/vendor
 curl -X POST -d "name=Iowa+Wine+Growers+Assn.&landmark=West+of+Grandfather's+Barn&lat=41.594357&lng=-93.54742" http://localhost:1337/vendor
 curl -X POST -d "name=Palazzo's+Java+House&landmark=Between+Pioneer+Hall+and+Museum&lat=41.595721&lng=-93.547307" http://localhost:1337/vendor
-
