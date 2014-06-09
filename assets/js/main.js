@@ -47,6 +47,13 @@ var main = (function($) {
         });
     };
 
+    var addCacheEventHandlers = function () {
+      // see http://diveintohtml5.info/offline.html for info on offline mode
+      // specifically see the events section.
+      // It could be useful to watch for the noupdate event which signifies 
+      // the page was served from cache.
+    };
+
 
     var init = function () {
         console.log('ready');
