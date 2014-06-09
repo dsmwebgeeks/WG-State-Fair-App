@@ -23,6 +23,7 @@ module.exports = {
    * `VendorController.update()`
    */
   update: function (req, res) {
+    'use strict';
     return res.json({
       todo: 'update() is not implemented yet!'
     });
@@ -35,17 +36,24 @@ module.exports = {
    * /vendor or /vendor/find is called.
    * TODO: override the default find so that it returns all records in randomized order
    */
-  // find: function (req, res) {
-  //   return res.json({
-  //     todo: 'find() is not implemented yet!'
-  //   });
-  // },
+  find: function (req, res) {
+    'use strict';
+
+    Vendor.find({}).exec(function findCB(err, found){
+      return res.json(found);
+    })
+
+    // return res.json({
+    //   todo: 'find() is not implemented yet!'
+    // });
+  },
 
 
   /**
    * `VendorController.vote()`
    */
   vote: function (req, res) {
+    'use strict';
     return res.json({
       todo: 'vote() is not implemented yet!'
     });
@@ -56,6 +64,7 @@ module.exports = {
    * `VendorController.additem()`
    */
   additem: function (req, res) {
+    'use strict';
     return res.json({
       todo: 'additem() is not implemented yet!'
     });
