@@ -1,5 +1,6 @@
 var main = (function($) {
     // custom code goes here
+    'use strict';
 
     var showVendors = function (data) {
         var $list = $('.sub-nav ul');
@@ -14,23 +15,23 @@ var main = (function($) {
         });
 
         $('.sub-nav h2 span').fadeOut(1000);
-    }
+    };
 
     var loadVendors = function () {
         $('.sub-nav h2 span').show().addClass('glyphicon-time');
         $.get('/vendor', showVendors);
-    }
+    };
 
     var showReloadLink = function () {
         $('a[href=#reload]').removeClass('hide');
-    }
+    };
 
     var enableRefresh = function () {
         $('a[href=#reload]').click(function(e) {
             e.preventDefault();
             loadVendors();
-        })
-    }
+        });
+    };
 
 
     var deleteAllVendors = function() {
@@ -44,7 +45,7 @@ var main = (function($) {
                 });
             }
         });
-    }
+    };
 
 
     var init = function () {
@@ -52,13 +53,13 @@ var main = (function($) {
         loadVendors();
         showReloadLink();
         enableRefresh();
-    }
+    };
 
     return {
         init: init,
         loadVendors: loadVendors,
         deleteAllVendors: deleteAllVendors
-    }   
+    };
 }($));
 
 $(document).ready(main.init);
