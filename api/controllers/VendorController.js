@@ -5,6 +5,8 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var _ = require('underscore');
+
 
 module.exports = {
 
@@ -40,12 +42,8 @@ module.exports = {
     'use strict';
 
     Vendor.find({}).exec(function findCB(err, found){
-      return res.json(found);
+      return res.json( _.shuffle(found) );
     })
-
-    // return res.json({
-    //   todo: 'find() is not implemented yet!'
-    // });
   },
 
 
