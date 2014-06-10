@@ -2,15 +2,31 @@ var main = (function($) {
     // custom code goes here
     'use strict';
 
+    var checkAgain;
+
     var showVendors = function (data) {
         var $list = $('.sub-nav ul');
+        
         $list.empty();
 
         if(!data.length) {
-            $list.append('<li><a href="#add">Add a vendor</a></li>');
-        }
+            
+            data = JSON.parse(localStorage.getItem("data_string"));
 
-        $.each(data, function(index, value) {
+            console.log("I pulled from local storage");
+   
+            if( new Date().getTime() - checkAgain > 5000 ){ 
+              console.log ("It has been more than 5 seconds since we last connected to the server");
+              setTimeout( loadVendors, 1000) 
+           }
+            //$list.append('<li><a href="#add">Add a vendor</a></li>');
+        }
+        else{
+           localStorage.setItem("data_string", JSON.stringify(data) );
+            checkAgain = new Date().getTime();
+          }
+           
+         $.each(data, function(index, value) {
             $list.append('<li><a href="/vendor/' + value.id + '">' + value.name + '</a></li>');
         });
 
@@ -19,7 +35,10 @@ var main = (function($) {
 
     var loadVendors = function () {
         $('.sub-nav h2 span').show().addClass('glyphicon-time');
-        $.get('/vendor', showVendors);
+        $.get('/vendor').success(showVendors).error(function(){ 
+            showVendors([]);
+            console.log('Danger will robinson');   
+        });
     };
 
     var showReloadLink = function () {
