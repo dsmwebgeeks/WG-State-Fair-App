@@ -29,30 +29,33 @@
 
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <div class="container">
-            <a class="navbar-brand" href="index.html">State Fair App</a>
-            <a href="index.html" class="btn navbar-btn btn-primary">
+            <a class="navbar-brand" href="/">State Fair App</a>
+            <a href="/search" class="btn navbar-btn btn-primary">
               <i class="fa fa-search"></i> Search
             </a>
-            <a href="#reload" class="btn navbar-btn btn-warning">
+            <a href="#" class="btn navbar-btn btn-warning">
               <i class="fa fa-refresh fa-spin"></i> Reload
             </a>
           </div>
         </div>
 
-<!-- Index/Home Page Content
+
+
+<!-- View Search Results Page Content
 ================================================== -->
         <div class="container">
-          <h1>Search for State Fair food items</h1>
-          <p class="lead">Use this app to find vendors and food items at the Iowa State Fair. If you see something we are missing, please add it. This app should run off line.</p>
+          <h1>Search Results</h1>
+          <ul class="list-search-results">
+            <li class="list-heading">
+              <h2>Searching for {{ITEM_NAME}} <i class="fa fa-clock-o"></i></h2>
+            </li>
+            <li><a href="/vendor">Result item #1</a></li>
+            <li><a href="/vendor">Result item #2</a></li>
+            <li><a href="/vendor">Result item #3</a></li>
+            <li><a href="/vendor">Result item #4</a></li>
+          </ul>
+        </div>
 
-          <div class="list-group">
-            <a href="/search" class="list-group-item">Coke</a>
-            <a href="/search" class="list-group-item">Diet Coke</a>
-            <a href="/search" class="list-group-item">Cherry Coke</a>
-            <a href="/search" class="list-group-item">Coke Zero</a>
-          </div>
-
-        </div><!-- /.container -->
 
 
 
