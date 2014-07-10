@@ -31,6 +31,18 @@ module.exports.routes = {
     view: 'homepage'
   },
 
+  '/search': {
+    view: 'search'
+  },
+
+  '/vendor': {
+    view: 'vendor'
+  },
+
+  '/vendor/edit': {
+    view: 'vendor-edit'
+  },
+
 
   // Custom routes here...
 
