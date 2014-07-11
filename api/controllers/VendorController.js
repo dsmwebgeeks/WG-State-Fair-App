@@ -20,7 +20,6 @@ module.exports = {
   //   });
   // },
 
-
   /**
    * `VendorController.update()`
    */
