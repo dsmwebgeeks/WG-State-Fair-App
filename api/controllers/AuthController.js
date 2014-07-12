@@ -75,9 +75,13 @@ var AuthController = {
    */
   isLoggedIn: function (req, res) {
     'use strict';
-    return res.json({
-      username: req.user ? req.user.username : false
-    });
+    if (req.user) {
+      return res.json({
+        username: req.user.username
+      });
+    } else {
+      return res.badRequest();
+    }
   },
 
   /**
