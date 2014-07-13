@@ -52,6 +52,17 @@ var main = (function($) {
         });
     };
 
+    var enableLoginLogout = function () {
+        $.get('/isLoggedIn')
+            .done(function (data){
+                console.log(data);
+                $("a[href='/logout']").removeClass('hide');
+            }).fail(function (data) {
+                console.log('error handler');
+                $("a[href='/login']").removeClass('hide');
+            });
+    };
+
 
     var deleteAllVendors = function() {
         $.get('/vendor', function (data) {
@@ -79,6 +90,7 @@ var main = (function($) {
         loadVendors();
         showReloadLink();
         enableRefresh();
+        enableLoginLogout();
     };
 
     return {
