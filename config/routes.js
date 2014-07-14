@@ -42,15 +42,20 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/search': {
-    view: 'search'
+  // We need to add partial views here for Angular Routing
+  '/partials/items': {
+    view: 'items'
   },
 
-  '/vendor/num': {
+  '/partials/vendors': {
+    view: 'vendors'
+  },
+
+  '/partials/vendor': {
     view: 'vendor'
   },
 
-  '/vendor/edit': {
+  '/partials/vendor_edit': {
     view: 'vendor-edit'
   },
 

@@ -100,4 +100,82 @@ var main = (function($) {
     };
 }($));
 
-$(document).ready(main.init);
+$(document).ready(function() {
+    main.init();
+});
+
+var app = angular.module('fairApp', ['ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'partials/items',
+        })
+        .when('/vendors', {
+            templateUrl: 'partials/vendors',
+            controller: 'VendorsCtrl'
+        })
+        .when('/vendor/:id', {
+            templateUrl: 'partials/vendor',
+            controller: 'VendorCtrl'
+        })
+        .when('/vendor/edit/:id', {
+            templateUrl: 'partials/vendor_edit',
+            controll: 'EditVendorCtrl'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
+});
+
+app.controller('VendorsCtrl', function($scope, $http, $location) {
+    var query = $location.search().itemName;
+
+    this.loadList = function() {
+        $http.get('/vendor', {
+            timeout: 1000
+        }).success(function(data) {
+            $scope.vendors = data;
+            localStorage.setItem('vendorList', JSON.stringify(data));
+
+            console.log('Online');
+
+        }).error(function() {
+            $scope.vendors = JSON.parse(localStorage.getItem('vendorList'));
+            // Could make recursive to try again if error
+            console.log('Offline');
+        });
+    };
+
+    this.loadList();
+
+    // If a query was set,
+    if ( query ) {
+        console.log( query );
+        // TODO: Filter the list by the search query.
+    }
+});
+
+app.controller('VendorCtrl', function($scope, $http, $routeParams) {
+    var itemId = $routeParams.id;
+
+    this.loadVendor = function() {
+        $http.get('/vendor/' + itemId, {
+            timeout: 1000
+        }).success(function(data) {
+            $scope.vendor = data;
+
+            // Maybe set the vendor data in localstorage?
+            console.log('Online');
+        }).error(function() {
+            // Offline support needed.
+            console.log('Offline');
+        })
+    };
+
+    this.loadVendor();
+});
+
+app.controller('EditVendorCtrl', function($scope) {
+    // TODO: Load the vendor's current data and provide support for basic CRUD
+});
