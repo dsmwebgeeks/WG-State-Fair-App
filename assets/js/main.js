@@ -5,19 +5,19 @@ var main = (function($) {
     var checkAgain;
 
     var showVendors = function (data) {
-        var $list = $('.sub-nav ul');
-        
+        var $list = $('.list-search-results');
+
         $list.empty();
 
         if(!data.length) {
-            
+
             data = JSON.parse(localStorage.getItem("data_string"));
 
             console.log("I pulled from local storage");
-   
-            if( new Date().getTime() - checkAgain > 5000 ){ 
+
+            if( new Date().getTime() - checkAgain > 5000 ){
               console.log ("It has been more than 5 seconds since we last connected to the server");
-              setTimeout( loadVendors, 1000) 
+              setTimeout( loadVendors, 1000)
            }
             //$list.append('<li><a href="#add">Add a vendor</a></li>');
         }
@@ -25,7 +25,7 @@ var main = (function($) {
            localStorage.setItem("data_string", JSON.stringify(data) );
             checkAgain = new Date().getTime();
           }
-           
+
          $.each(data, function(index, value) {
             $list.append('<li><a href="/vendor/' + value.id + '">' + value.name + '</a></li>');
         });
@@ -35,9 +35,9 @@ var main = (function($) {
 
     var loadVendors = function () {
         $('.sub-nav h2 span').show().addClass('glyphicon-time');
-        $.get('/vendor').success(showVendors).error(function(){ 
+        $.get('/vendor').success(showVendors).error(function(){
             showVendors([]);
-            console.log('Danger will robinson');   
+            console.log('Danger will robinson');
         });
     };
 
@@ -80,7 +80,7 @@ var main = (function($) {
     var addCacheEventHandlers = function () {
       // see http://diveintohtml5.info/offline.html for info on offline mode
       // specifically see the events section.
-      // It could be useful to watch for the noupdate event which signifies 
+      // It could be useful to watch for the noupdate event which signifies
       // the page was served from cache.
     };
 

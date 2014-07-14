@@ -46,7 +46,7 @@ module.exports.routes = {
     view: 'search'
   },
 
-  '/vendor': {
+  '/vendor/num': {
     view: 'vendor'
   },
 
