@@ -121,7 +121,7 @@ app.config(function($routeProvider) {
         })
         .when('/vendor/edit/:id', {
             templateUrl: 'partials/vendor_edit',
-            controll: 'EditVendorCtrl'
+            controller: 'EditVendorCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -176,6 +176,30 @@ app.controller('VendorCtrl', function($scope, $http, $routeParams) {
     this.loadVendor();
 });
 
-app.controller('EditVendorCtrl', function($scope) {
-    // TODO: Load the vendor's current data and provide support for basic CRUD
+app.controller('EditVendorCtrl', function($scope, $http, $routeParams) {
+    var itemId = $routeParams.id;
+
+    this.loadVendor = function() {
+        $http.get('/vendor/' + itemId, {
+            timeout: 1000
+        }).success(function(data) {
+                $scope.vendor = data;
+
+                // Maybe set the vendor data in localstorage?
+                console.log('Online');
+            }).error(function() {
+                // Offline support needed.
+                console.log('Offline');
+            })
+    };
+
+    $scope.submit = function() {
+       console.log("I am the submit function: vendor.landmark="+this.vendor.landmark);
+       console.log("vendor is: " + this.vendor);
+       console.log("vendor is: " + JSON.stringify(this.vendor));
+    };
+
+    console.log("Version with a submit function");
+    this.loadVendor();
+
 });

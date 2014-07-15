@@ -4,6 +4,7 @@ To get started:
 
 1. Dowload this app
 1. Run `npm install`
+1. Run `bower install`
 1. Launch the app with `npm start`
 
 # To preload the list of vendors:

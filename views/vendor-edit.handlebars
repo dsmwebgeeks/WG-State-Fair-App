@@ -4,10 +4,10 @@
 <h1>Edit Vendor Info</h1>
 <p class="lead">Use this form to update, add, or delete information on this vendor.</p>
 
-<form role="form">
+<form role="form" ng-submit="submit()" ng-controller="EditVendorCtrl">
   <div class="form-group">
     <label for="">Vendor Name</label>
-    <input type="text" class="form-control" placeholder="Vendor Name">
+    <input type="text" class="form-control" ng-model="vendor.landmark" placeholder="Vendor Name">
   </div>
   <div class="form-group">
     <label for="">Directions</label>
@@ -17,10 +17,10 @@
     <label for="exampleInputFile">Geo Locations</label>
     <div class="row">
       <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="Latitude">
+        <input type="text" class="form-control" ng-model="vendor.lat" placeholder="Latitude">
       </div>
       <div class="col-xs-6">
-        <input type="text" class="form-control" placeholder="Longitude">
+        <input type="text" class="form-control" ng-model="vendor.lng" placeholder="Longitude">
       </div>
     </div>
     <p class="help-block">You should be able to get the geo locations off of your phone</p>
@@ -50,5 +50,5 @@
   <!-- End -->
 
 
-  <button type="submit" class="btn btn-default">Submit</button>
+  <input type="submit" id="submit" value="Submit" class="btn btn-default"/>
 </form>
