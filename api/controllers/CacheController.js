@@ -25,7 +25,7 @@ module.exports = {
     // you can increment rev if you want in order to force the cache manifest file to change
     var locals = {
       layout: false,
-      rev: 29
+      rev: 30
     };
     return res.view('manifest', locals);
 
