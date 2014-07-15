@@ -195,6 +195,8 @@ app.controller('EditVendorCtrl', function($scope, $http, $routeParams) {
 
     $scope.submit = function() {
        console.log("I am the submit function: vendor.landmark="+this.vendor.landmark);
+       console.log("vendor is: " + this.vendor);
+       console.log("vendor is: " + JSON.stringify(this.vendor));
     };
 
     console.log("Version with a submit function");
