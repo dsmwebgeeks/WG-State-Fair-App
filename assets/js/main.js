@@ -193,8 +193,11 @@ app.controller('EditVendorCtrl', function($scope, $http, $routeParams) {
             })
     };
 
+    $scope.submit = function() {
+       console.log("I am the submit function");
+    };
+
+    console.log("Version with a submit function");
     this.loadVendor();
-
-
 
 });

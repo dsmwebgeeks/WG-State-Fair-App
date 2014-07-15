@@ -4,7 +4,7 @@
 <h1>Edit Vendor Info</h1>
 <p class="lead">Use this form to update, add, or delete information on this vendor.</p>
 
-<form role="form">
+<form role="form" ng-submit="submit()" ng-controller="EditVendorCtrl">
   <div class="form-group">
     <label for="">Vendor Name</label>
     <input type="text" class="form-control" ng-model="vendor.landmark" placeholder="Vendor Name">
@@ -50,5 +50,6 @@
   <!-- End -->
 
 
+  <input type="submit" id="submit" value="Submit from docs"/>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
