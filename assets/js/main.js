@@ -1,4 +1,4 @@
-var main = (function($) {
+var main = (function ($) {
     // custom code goes here
     'use strict';
 
@@ -9,24 +9,24 @@ var main = (function($) {
 
         $list.empty();
 
-        if(!data.length) {
+        if (!data.length) {
 
             data = JSON.parse(localStorage.getItem("data_string"));
 
             console.log("I pulled from local storage");
 
-            if( new Date().getTime() - checkAgain > 5000 ){
-              console.log ("It has been more than 5 seconds since we last connected to the server");
-              setTimeout( loadVendors, 1000)
-           }
+            if (new Date().getTime() - checkAgain > 5000) {
+                console.log("It has been more than 5 seconds since we last connected to the server");
+                setTimeout(loadVendors, 1000)
+            }
             //$list.append('<li><a href="#add">Add a vendor</a></li>');
         }
-        else{
-           localStorage.setItem("data_string", JSON.stringify(data) );
+        else {
+            localStorage.setItem("data_string", JSON.stringify(data));
             checkAgain = new Date().getTime();
-          }
+        }
 
-         $.each(data, function(index, value) {
+        $.each(data, function (index, value) {
             $list.append('<li><a href="/vendor/' + value.id + '">' + value.name + '</a></li>');
         });
 
@@ -35,7 +35,7 @@ var main = (function($) {
 
     var loadVendors = function () {
         $('.sub-nav h2 span').show().addClass('glyphicon-time');
-        $.get('/vendor').success(showVendors).error(function(){
+        $.get('/vendor').success(showVendors).error(function () {
             showVendors([]);
             console.log('Danger will robinson');
         });
@@ -46,7 +46,7 @@ var main = (function($) {
     };
 
     var enableRefresh = function () {
-        $('a[href=#reload]').click(function(e) {
+        $('a[href=#reload]').click(function (e) {
             e.preventDefault();
             loadVendors();
         });
@@ -54,7 +54,7 @@ var main = (function($) {
 
     var enableLoginLogout = function () {
         $.get('/isLoggedIn')
-            .done(function (data){
+            .done(function (data) {
                 console.log(data);
                 $("a[href='/logout']").removeClass('hide');
             }).fail(function (data) {
@@ -64,10 +64,10 @@ var main = (function($) {
     };
 
 
-    var deleteAllVendors = function() {
+    var deleteAllVendors = function () {
         $.get('/vendor', function (data) {
-            if(data.length) {
-                $.each(data, function(index, value) {
+            if (data.length) {
+                $.each(data, function (index, value) {
                     $.ajax({
                         method: 'DELETE',
                         url: '/vendor/' + value.id
@@ -78,10 +78,10 @@ var main = (function($) {
     };
 
     var addCacheEventHandlers = function () {
-      // see http://diveintohtml5.info/offline.html for info on offline mode
-      // specifically see the events section.
-      // It could be useful to watch for the noupdate event which signifies
-      // the page was served from cache.
+        // see http://diveintohtml5.info/offline.html for info on offline mode
+        // specifically see the events section.
+        // It could be useful to watch for the noupdate event which signifies
+        // the page was served from cache.
     };
 
 
@@ -100,82 +100,101 @@ var main = (function($) {
     };
 }($));
 
-$(document).ready(function() {
+$(document).ready(function () {
     main.init();
 });
 
 var app = angular.module('fairApp', ['ngRoute']);
 
-app.config(function($routeProvider) {
+app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'partials/items',
+            templateUrl: 'partials/items'
         })
         .when('/vendors', {
             templateUrl: 'partials/vendors',
-            controller: 'VendorsCtrl'
+            controller: 'VendorsCtrl',
+            resolve: {
+                vendors: function ($http) {
+                    return $http.get('/vendor',{timeout: 1000})
+                        .then(function (response) {
+                            return response.data;
+                        });
+                }
+            }
         })
         .when('/vendor/:id', {
             templateUrl: 'partials/vendor',
-            controller: 'VendorCtrl'
+            controller: 'VendorCtrl',
+            resolve : {
+                vendor: function($http,$route){
+                    return $http.get('/vendor/' + $route.current.params.id, {timeout: 1000})
+                        .then(function(response){
+                            return response.data;
+                        })
+                }
+            }
         })
         .when('/vendor/edit/:id', {
             templateUrl: 'partials/vendor_edit',
-            controll: 'EditVendorCtrl'
+            controller: 'EditVendorCtrl',
+            resolve: {
+                vendor: function($http,$route){
+                    return $http.get('/vendor/' + $route.current.params.id, {timeout: 1000})
+                        .then(function(response){
+                            return response.data;
+                        })
+                }
+            }
         })
         .otherwise({
             redirectTo: '/'
         });
 });
 
-app.controller('VendorsCtrl', function($scope, $http, $location) {
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push(['$rootScope', '$q', '$location', function ($rootScope, $q) {
+        return {
+            responseError: function (response) {
+                console.log(response);
+                if (response.config.timeout){
+                    var data = localStorage.getItem(response.config.url)
+                    if (data){
+                        response.data = JSON.parse(data);
+                        return response;
+                    }
+                }
+                return $q.reject(response);
+            },
+            response: function(response){
+                if (response.config.timeout)
+                {
+                    localStorage.setItem(response.config.url,JSON.stringify(response.data));
+                }
+                return response;
+            }
+        }
+
+    }]);
+}]);
+
+app.controller('VendorsCtrl', function ($scope, $http, $location, $route) {
     var query = $location.search().itemName;
 
-    this.loadList = function() {
-        $http.get('/vendor', {
-            timeout: 1000
-        }).success(function(data) {
-            $scope.vendors = data;
-            localStorage.setItem('vendorList', JSON.stringify(data));
+    $scope.vendors = $route.current.locals.vendors;
 
-            console.log('Online');
-
-        }).error(function() {
-            $scope.vendors = JSON.parse(localStorage.getItem('vendorList'));
-            // Could make recursive to try again if error
-            console.log('Offline');
-        });
-    };
-
-    this.loadList();
 
     // If a query was set,
-    if ( query ) {
-        console.log( query );
+    if (query) {
+        console.log(query);
         // TODO: Filter the list by the search query.
     }
 });
 
-app.controller('VendorCtrl', function($scope, $http, $routeParams) {
-    var itemId = $routeParams.id;
-
-    this.loadVendor = function() {
-        $http.get('/vendor/' + itemId, {
-            timeout: 1000
-        }).success(function(data) {
-            $scope.vendor = data;
-
-            // Maybe set the vendor data in localstorage?
-            console.log('Online');
-        }).error(function() {
-            // Offline support needed.
-            console.log('Offline');
-        })
-    };
-
-    this.loadVendor();
+app.controller('VendorCtrl', function ($scope, $route) {
+    $scope.vendor = $route.current.locals.vendor;
 });
 
-app.controller('EditVendorCtrl', function($scope) {
-    // TODO: Load the vendor's current data and provide support for basic CRUD
+app.controller('EditVendorCtrl', function ($scope, $route) {
+    $scope.vendor = $route.current.locals.vendor;
 });
