@@ -121,7 +121,7 @@ app.config(function($routeProvider) {
         })
         .when('/vendor/edit/:id', {
             templateUrl: 'partials/vendor_edit',
-            controll: 'EditVendorCtrl'
+            controller: 'EditVendorCtrl'
         })
         .otherwise({
             redirectTo: '/'
@@ -158,6 +158,7 @@ app.controller('VendorsCtrl', function($scope, $http, $location) {
 
 app.controller('VendorCtrl', function($scope, $http, $routeParams) {
     var itemId = $routeParams.id;
+    $scope.userIsLoggedIn = false;
 
     this.loadVendor = function() {
         $http.get('/vendor/' + itemId, {
@@ -173,9 +174,58 @@ app.controller('VendorCtrl', function($scope, $http, $routeParams) {
         })
     };
 
+    this.checkIfLoggedIn = function() {
+        $http.get('/isLoggedIn').success(function() {
+            $scope.userIsLoggedIn = true;
+            // console.log('Success! ' + $scope.userIsLoggedIn);
+        }).error(function() {
+            $scope.userIsLoggedIn = false;
+            // console.log('Error! ' + $scope.userIsLoggedIn);
+        });
+    };
+
+    this.checkIfLoggedIn();
     this.loadVendor();
 });
 
-app.controller('EditVendorCtrl', function($scope) {
-    // TODO: Load the vendor's current data and provide support for basic CRUD
+app.controller('EditVendorCtrl', function($scope, $http, $routeParams, $location) {
+    var itemId = $routeParams.id;
+
+    this.loadVendor = function() {
+        $http.get('/vendor/' + itemId, {
+            timeout: 1000
+        }).success(function(data) {
+            $scope.vendor = data;
+            console.log(data);
+
+            // Maybe set the vendor data in localstorage?
+            console.log('Online');
+        }).error(function() {
+            // Offline support needed.
+            console.log('Offline');
+        })
+    };
+
+    $scope.updateVendor = function() {
+        console.log('Update');
+        var name = $scope.vendor.name;
+        var landmark = $scope.vendor.landmark;
+        var lat = $scope.vendor.lat;
+        var lng = $scope.vendor.lng;
+
+        $http.put('/vendor/' + itemId, {
+            name: name,
+            landmark: landmark,
+            lat: lat,
+            lng: lng
+        }).success(function(data) {
+            console.log(data);
+
+            $location.path('/vendor/' + itemId);
+        }).error(function(data) {
+            console.log(data);
+        });
+    }
+
+    this.loadVendor();
 });

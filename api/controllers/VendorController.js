@@ -23,12 +23,12 @@ module.exports = {
   /**
    * `VendorController.update()`
    */
-  update: function (req, res) {
-    'use strict';
-    return res.json({
-      todo: 'update() is not implemented yet!'
-    });
-  },
+  // update: function (req, res) {
+  //   'use strict';
+  //   return res.json({
+  //     todo: 'update() is not implemented yet!'
+  //   });
+  // },
 
 
   /**

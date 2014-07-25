@@ -1,12 +1,15 @@
 <!-- Vendor Page Content
 ================================================== -->
 <div class="media">
-  <a class="pull-right media-object btn btn-sm btn-warning" href="#/vendor/edit/\{{ vendor.id }}">
+  <a class="pull-right media-object btn btn-sm btn-warning" href="#/vendor/edit/\{{ vendor.id }}" ng-show="userIsLoggedIn">
     <i class="fa fa-pencil"></i> Edit this location
+  </a>
+  <a class="pull-right media-object btn btn-sm btn-warning" href="/login" ng-hide="userIsLoggedIn">
+    <i class="fa fa-pencil"></i> Log in to edit this location
   </a>
   <div class="media-body">
     <h1 class="media-heading">\{{ vendor.name }}</h1>
-    <p>DESCRIPTION OF LOCATION</p>
+    <p>\{{ vendor.landmark }}</p>
   </div>
 </div>
 </div><!-- /.container -->
