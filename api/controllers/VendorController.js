@@ -10,16 +10,6 @@ var _ = require('underscore');
 
 module.exports = {
 
-
-  /**
-   * `VendorController.create()`
-   */
-  // create: function (req, res) {
-  //   return res.json({
-  //     todo: 'create() is not implemented yet!'
-  //   });
-  // },
-
   /**
    * `VendorController.update()`
    */
@@ -29,7 +19,6 @@ module.exports = {
       todo: 'update() is not implemented yet!'
     });
   },
-
 
   /**
    * `VendorController.find()`
@@ -45,26 +34,48 @@ module.exports = {
     })
   },
 
-
-  /**
-   * `VendorController.vote()`
-   */
-  vote: function (req, res) {
+  comments: function (req, res) {
     'use strict';
-    return res.json({
-      todo: 'vote() is not implemented yet!'
-    });
+    if(!req.params.vendor) {
+      res.badRequest('Vendor ID required');
+    } else {
+      var vendor = req.params.vendor;
+      Comment.find({vendor: vendor}).exec(function(err, comments) {
+        if(err) {
+          res.badRequest('Vendor ID not found');
+        } else {
+          return res.json({
+            comments: comments
+          }); 
+        }
+      })
+    }
   },
-
 
   /**
    * `VendorController.additem()`
    */
-  additem: function (req, res) {
+  addcomment: function (req, res) {
     'use strict';
-    return res.json({
-      todo: 'additem() is not implemented yet!'
-    });
+    console.log(req.user);
+    if(!req.params.vendor) {
+      res.badRequest('Vendor ID required');
+    } else if (!req.user) {
+      res.forbidden('Pleae log in');
+    } else if (!req.params.comment) {
+      res.badRequest('Comment required');
+    } else {
+      var vendor = req.params.vendor;
+      Comment.create({
+        vendor: vendor,
+        comment: req.params.contact,
+        user: req.user
+      }).done(function(err, comments) {
+        return res.json({
+          err: err
+        });
+      })
+    }
   }
 };
 

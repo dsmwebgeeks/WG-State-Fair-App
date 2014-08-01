@@ -42,17 +42,20 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  '/search': {
-    view: 'search'
-  },
+  // '/search': {
+  //   view: 'search'
+  // },
 
-  '/vendor/num': {
-    view: 'vendor'
-  },
+  // '/vendor/num': {
+  //   view: 'vendor'
+  // },
 
-  '/vendor/edit': {
-    view: 'vendor-edit'
-  },
+  // '/vendor/edit': {
+  //   view: 'vendor-edit'
+  // },
+
+  '/vendor/:vendor/comments': 'VendorController.comments',
+  '/vendor/:vendor/addcomment': 'VendorController.addcomment',
 
 
   // Custom routes here...
