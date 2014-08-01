@@ -56,7 +56,7 @@
     "sails": "^0.10.0-rc8",
     "sails-disk": "~0.10.0",
     "sails-generate-auth": "^0.1.6",
-    "sails-mongo": "^0.9.8",
+    "sails-mongo": "^~0.10.0",
     "underscore": "^1.6.0",
     "validator": "^3.16.1"
   },
