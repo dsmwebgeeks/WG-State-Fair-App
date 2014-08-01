@@ -14,6 +14,12 @@
  * http://passportjs.org/guide/providers/
  */
 
+if(process.env.CALLBACK_URL) {
+  callback_url = process.env.CALLBACK_URL;
+} else {
+  callback_url = 'http://localhost:1337/auth/twitter/callback';
+}
+
 module.exports.passport = {
 
   // local: {
@@ -26,7 +32,8 @@ module.exports.passport = {
     strategy: require('passport-twitter').Strategy,
     options: {
       consumerKey: 'KDHGU6MxpD9hozN5chLkwlTKO',
-      consumerSecret: 'rI0BWzIHZYzqEAhJ4VhJxHTdCI7tVJCtbPRyhzMr3IqOKDYOy2'
+      consumerSecret: 'rI0BWzIHZYzqEAhJ4VhJxHTdCI7tVJCtbPRyhzMr3IqOKDYOy2',
+      callbackURL: callback_url
     }
   // },
 
