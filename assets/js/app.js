@@ -214,9 +214,16 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.toggleCategory = function(item) {
-		for (item in $scope.categories) {
-			console.log(item, $scope.categories[item]);
+		var categories = $scope.categories;
+
+		for (cat in categories) {
+			if (cat === item && categories[cat]) {
+				categories[cat] = false;
+			} else if (cat === item && categories[cat] === false) {
+				categories[cat] = true;
+			}
 		}
+		console.log(categories);
 	};
 
 
