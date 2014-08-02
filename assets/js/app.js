@@ -180,7 +180,12 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.getComments = function() {
-		console.log("Comments will be gotten now");
+		$http.get("/vendor/"+$scope.itemId+"/comments")
+		.success(function(data) {
+			$scope.comments = data.reverse();
+		}).error(function(err) {
+			console.log(err);
+		});
 	};
 
 
@@ -216,14 +221,18 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.addComment = function() {
-		var comment = {
-			username: $scope.username,
-			body: $scope.comment.text
-		};
+		//$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">@'+$scope.username+'</h4><p class="list-group-item-text">'+$scope.comment+'</p></div>');
 
-		$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">@'+$scope.username+'</h4><p class="list-group-item-text">'+$scope.comment.text+'</p></div>');
-
-		console.log(comment);
+		$http.post("/vendor/addcomment", {
+			vendor: $scope.itemId,
+			comment: $scope.comment
+		})
+		.success(function(data) {
+			console.log(data);
+			$scope.getComments();
+		}).error(function(err) {
+			console.log(err);
+		});
 	};
 
 

@@ -41,13 +41,8 @@ module.exports = {
     } else {
       var vendor = req.params.vendor;
       Comment.find({vendor: vendor}).exec(function(err, comments) {
-        if(err) {
-          res.badRequest('Vendor ID not found');
-        } else {
-          return res.json({
-            comments: comments
-          }); 
-        }
+        if (err) { return res.badRequest('Vendor ID not found'); }
+				return res.json(comments);  
       })
     }
   },
@@ -57,24 +52,28 @@ module.exports = {
    */
   addcomment: function (req, res) {
     'use strict';
-    console.log(req.user);
-    if(!req.params.vendor) {
+		var vendor = req.param('vendor');
+		var user = req.user.username;
+		var comment = req.param('comment');
+
+    if(!vendor) {
       res.badRequest('Vendor ID required');
-    } else if (!req.user) {
-      res.forbidden('Pleae log in');
-    } else if (!req.params.comment) {
+    } else if (!user) {
+      res.forbidden('Please log in');
+    } else if (!comment) {
       res.badRequest('Comment required');
     } else {
-      var vendor = req.params.vendor;
       Comment.create({
         vendor: vendor,
-        comment: req.params.contact,
-        user: req.user
-      }).done(function(err, comments) {
-        return res.json({
-          err: err
-        });
-      })
+        comment: comment,
+        user: user
+      }).exec(function(err, comment) {
+				if (err) { return res.json({err: err}); }
+				return res.json({
+					added: true,
+					comment: comment
+				});
+      });
     }
   }
 };

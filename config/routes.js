@@ -55,7 +55,7 @@ module.exports.routes = {
   // },
 
   '/vendor/:vendor/comments': 'VendorController.comments',
-  '/vendor/:vendor/addcomment': 'VendorController.addcomment',
+  //'/vendor/:vendor/addcomment': 'VendorController.addcomment',
 
 
   // Custom routes here...

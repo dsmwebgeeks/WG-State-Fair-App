@@ -37,18 +37,14 @@
 	</div>
 
 	<form ng-submit="addComment()" ng-show="userIsLoggedIn">
-		<textarea class="form-control" rows="3" placeholder="Type your comment" ng-model="comment.text"></textarea>
+		<textarea class="form-control" rows="3" placeholder="Type your comment" ng-model="comment"></textarea>
 		<input type="submit" value="Add Comment" class="btn btn-success btn-block" />
 	</form>
 
-	<div class="list-group">
+	<div class="list-group" ng-repeat="comment in comments">
 		<div class="list-group-item">
-			<h4 class="list-group-item-heading">Hello</h4>
-			<p class="list-group-item-text">I have an amazing comment to make.</p>
-		</div>
-		<div class="list-group-item">
-			<h4 class="list-group-item-heading">Hello</h4>
-			<p class="list-group-item-text">I have an amazing comment to make.</p>
+			<h4 class="list-group-item-heading">@{{comment.user}}</h4>
+			<p class="list-group-item-text">{{comment.comment}}</p>
 		</div>
 	</div>
 </div>

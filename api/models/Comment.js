@@ -1,14 +1,19 @@
-/**
-* Comment.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
-
 module.exports = {
-
-  attributes: {
-
-  }
+	attributes: {
+		user: {
+			type: "string",
+			required: true
+		},
+		comment: {
+			type: "text",
+			required: true
+		},
+		// Vendor can be a model, so it'll be possible to find a vendor with comments
+		// That can only be an advantage if saving the comments to localstorage is wanted
+		vendor: {
+			type: "string",
+			required: true
+		}
+	}
 };
 
