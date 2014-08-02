@@ -16,6 +16,8 @@ app.config(function($routeProvider) {
 	});
 });
 
+
+
 function startReloadSpin() {
 	$("a[href=#reload] i").addClass("fa-spin");
 }
@@ -24,9 +26,9 @@ function stopReloadSpin() {
 	$("a[href=#reload] i").removeClass("fa-spin");
 }
 
-app.controller("VendorsController", function($scope, $http, $location) {
-	var query = $location.search().itemName;
 
+
+app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList = function() {
 		startReloadSpin();
 
@@ -37,7 +39,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 			$scope.vendors = data;
 			localStorage.setItem("vendorList", JSON.stringify(data));
-
 			$scope.sortVendors();
 
 			console.log("Online");
@@ -46,7 +47,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			stopReloadSpin();
 
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-
 			$scope.sortVendors();
 
 			console.log("Offline");
@@ -58,7 +58,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		// Should moernizr throw an error if no GPS?
 		// Should high accuracy be enabled?
 		// What about refreshing list?
-
 		navigator.geolocation.getCurrentPosition(gotGPS, errorGPS);
 
 		function errorGPS(err) {
@@ -77,7 +76,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 		function gotGPS(position) {
 			console.log("Got GPS");
-
 			var lat = position.coords.latitude;
 			var lng = position.coords.longitude;
 			
@@ -106,7 +104,9 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		}
 	};
 
+
 	$scope.loadList();
+
 
 	$scope.applyFilters = function() {
 		var filterCount = 0;
@@ -142,14 +142,15 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		}
 		
 		$scope.sortVendors();
-
 	};
+
 });
 
 
 app.controller("VendorController", function($scope, $http, $routeParams) {
 	$scope.itemId = $routeParams.id;
 	$scope.userIsLoggedIn = false;
+
 
 	$scope.loadVendor = function() {
 		startReloadSpin();
@@ -159,17 +160,15 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		}).success(function(data) {
 			stopReloadSpin();
 
-			$scope.vendor = data;
-			
+			$scope.vendor = data;	
 			$scope.loadMap();
 
-			// Maybe set the vendor data in localstorage?
 			console.log("Online");
+
 		}).error(function() {
 			stopReloadSpin();
 
 			$scope.loadMap();
-
 
 			// If saved json wasn't randomized it'd be possible to do something like
 			// $scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
@@ -186,7 +185,27 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			console.log("Offline");
 		});	
 	};
-	
+
+
+	$scope.login = function() {
+		console.log("Clicked");
+		$scope.userIsLoggedIn = true;
+	};
+
+
+	$scope.checkIfLoggedIn = function() {
+		$http.get("/isLoggedIn").success(function() {
+			$scope.userIsLogged = true;
+		}).error(function() {
+			$scope.userIsLoggedIn = false;
+		});
+	};
+
+
+	$scope.checkIfLoggedIn();
+	$scope.loadVendor();
+
+
 	$scope.categories = {
 		"beer": true,
 		"other": false,
@@ -194,6 +213,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		"pepsi": false,
 		"coke": false
 	};
+
 
 	$scope.toggleCategory = function(item) {
 		for (item in $scope.categories) {
@@ -206,21 +226,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">Hello</h4><p class="list-group-item-text">'+$scope.comment.text+'</p></div>');
 	};
 
-	$scope.login = function() {
-		console.log("Clicked");
-		$scope.userIsLoggedIn = true;
-	};
-
-	$scope.checkIfLoggedIn = function() {
-		$http.get("/isLoggedIn").success(function() {
-			$scope.userIsLogged = true;
-		}).error(function() {
-			$scope.userIsLoggedIn = false;
-		});
-	};
-
-	$scope.checkIfLoggedIn();
-	$scope.loadVendor();
 
 	$scope.loadMap = function() {
 		var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
@@ -232,8 +237,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			maxZoom: 19
 		}).addTo(map);
 	};
-
-
 
 });
 
