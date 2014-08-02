@@ -70,3 +70,21 @@ ul.list-search-results li a:hover {
   color: #E74B43;
   background-color: transparent;
 }
+.panel-title > a:before {
+  font-family: "FontAwesome";
+  content: "\f0d7";
+}
+.panel-title > .collapsed:before {
+  font-family: "FontAwesome";
+  content: "\f0da";
+}
+.text-white,
+a.text-white {
+  color: white;
+}
+.comments {
+  margin-top: 25px;
+}
+.comments form {
+  margin-bottom: 20px;
+}

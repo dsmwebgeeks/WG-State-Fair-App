@@ -1,0 +1,51 @@
+<div class="container">
+	<h1>Edit Vendor Info</h1>
+	<p class="lead">Use this form to update, add, or delete information on this vendor.</p>
+
+	<form role="form" ng-submit="updateVendor()">
+		<div class="form-group">
+			<label for="">Vendor Name</label>
+			<input type="text" class="form-control" placeholder="Vendor Name" ng-model="vendor.name">
+		</div>
+		<div class="form-group">
+			<label for="">Directions</label>
+			<input type="text" class="form-control" placeholder="Directions" ng-model="vendor.landmark">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputFile">Geo Locations</label>
+			<div class="row">
+				<div class="col-xs-6">
+					<input type="text" class="form-control" placeholder="Latitude" ng-model="vendor.lat">
+				</div>
+				<div class="col-xs-6">
+					<input type="text" class="form-control" placeholder="Longitude" ng-model="vendor.lng">
+				</div>
+			</div>
+			<p class="help-block">You should be able to get the geo locations off of your phone</p>
+		</div>
+
+		<!-- Edit list of vendor items -->
+		<div class="form-group">
+			<label for="exampleInputFile">Food item #1</label>
+			<div class="row form-group">
+				<div class="col-xs-6">
+					<label class="sr-only">Name</label>
+					<input type="text" class="form-control" placeholder="Name">
+				</div>
+				<div class="col-xs-6">
+					<label class="sr-only">Price</label>
+					<input type="text" class="form-control" placeholder="Price">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<label class="sr-only">Description</label>
+					<input type="text" class="form-control" placeholder="Description">
+				</div>
+			</div>
+			<p class="help-block">You should be able to get the geo locations off of your phone</p>
+		</div>
+
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+</div>

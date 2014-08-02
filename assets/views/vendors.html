@@ -1,0 +1,42 @@
+<div class="container">
+
+	<div class="panel-group" id="filter-select">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#filter-select" href="!#filter-list" class="collapsed">
+						Select type of food
+					</a>
+				</h4>
+			</div>
+			<div id="filter-list" class="panel-collapse collapse">
+				<div class="panel-body">
+					<p>Select what types of food you'd like to find</p>
+					<div>
+						<label for="hasTurkey">Has Turkey</label>
+						<input type="checkbox" class="switch" name="hasTurkey" ng-model="filters.hasTurkey" ng-change="applyFilters()">
+					</div>
+					<div>
+						<label for="hasBeef">Has Beef</label>
+						<input type="checkbox" name="hasBeef" ng-model="filters.hasBeef" ng-change="applyFilters()">
+					</div>
+					<div>
+						<label for="campbells">Campbell's Con.</label>
+						<input type="checkbox" name="campbells" ng-model="filters.campbells" ng-change="applyFilters()">
+					</div>
+
+				</div><!-- End panel body -->
+			</div>
+		</div>
+	</div>
+
+	<h1>Search Results</h1>
+	<em>Distances are absolute, and do not consider missing paths, walls, or stubborn people in the way.</em>
+
+	<ul class="list-search-results" ng-repeat="vendor in vendors | orderBy: 'distance'">
+		<!--li class="list-heading">
+			<h2>Searching for {{ITEM_NAME}} <i class="fa fa-clock-o"></i></h2>
+		</li-->
+		<li><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
+	</ul>
+</div>
