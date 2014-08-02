@@ -30,7 +30,7 @@ module.exports = {
     'use strict';
 
     Vendor.find({}).exec(function findCB(err, found){
-      return res.json( _.shuffle(found) );
+      return res.json(found);
     })
   },
 
