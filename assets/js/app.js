@@ -1,13 +1,8 @@
 var app = angular.module("fairDrinks", ["ngRoute"]);
-var api = "http://localhost:1337";
 
 app.config(function($routeProvider) {
 	$routeProvider
 	.when("/", {
-		templateUrl: "/views/vendors.html",
-		controller: "VendorsController"
-	})
-	.when("/vendors", {
 		templateUrl: "/views/vendors.html",
 		controller: "VendorsController"
 	})
@@ -35,7 +30,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList = function() {
 		startReloadSpin();
 
-		$http.get(api+"/vendor", {
+		$http.get("/vendor", {
 			timeout: 1000
 		}).success(function(data) {
 			stopReloadSpin();
@@ -159,7 +154,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	$scope.loadVendor = function() {
 		startReloadSpin();
 
-		$http.get(api+"/vendor/"+$scope.itemId, {
+		$http.get("/vendor/"+$scope.itemId, {
 			timeout: 1000
 		}).success(function(data) {
 			stopReloadSpin();
@@ -217,7 +212,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	};
 
 	$scope.checkIfLoggedIn = function() {
-		$http.get(api+"/isLoggedIn").success(function() {
+		$http.get("/isLoggedIn").success(function() {
 			$scope.userIsLogged = true;
 		}).error(function() {
 			$scope.userIsLoggedIn = false;
@@ -249,7 +244,7 @@ app.controller("EditVendorController", function($scope, $http, $routeParams, $lo
 	$scope.loadVendor = function() {
 		startReloadSpin();
 
-		$http.get(api+"/vendor/"+itemId, {
+		$http.get("/vendor/"+itemId, {
 			timeout: 1000
 		}).success(function(data) {
 			stopReloadSpin();
@@ -281,7 +276,7 @@ app.controller("EditVendorController", function($scope, $http, $routeParams, $lo
 		var lat = $scope.vendor.lat;
 		var lng = $scope.vendor.ng;
 
-		$http.put(api+"/vendor/"+itemId, {
+		$http.put("/vendor/"+itemId, {
 			name: name,
 			landmark: landmark,
 			lat: lat,
