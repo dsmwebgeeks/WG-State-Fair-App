@@ -179,15 +179,15 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	};
 
 
-	$scope.login = function() {
-		console.log("Clicked");
-		$scope.userIsLoggedIn = true;
+	$scope.getComments = function() {
+		console.log("Comments will be gotten now");
 	};
 
 
 	$scope.checkIfLoggedIn = function() {
-		$http.get("/isLoggedIn").success(function() {
-			$scope.userIsLogged = true;
+		$http.get("/isLoggedIn").success(function(data) {
+			$scope.userIsLoggedIn = true;
+			$scope.username = data.username;
 		}).error(function() {
 			$scope.userIsLoggedIn = false;
 		});
@@ -196,6 +196,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 	$scope.checkIfLoggedIn();
 	$scope.loadVendor();
+	$scope.getComments();
 
 
 	$scope.categories = {
@@ -215,7 +216,14 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.addComment = function() {
-		$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">Hello</h4><p class="list-group-item-text">'+$scope.comment.text+'</p></div>');
+		var comment = {
+			username: $scope.username,
+			body: $scope.comment.text
+		};
+
+		$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">@'+$scope.username+'</h4><p class="list-group-item-text">'+$scope.comment.text+'</p></div>');
+
+		console.log(comment);
 	};
 
 
