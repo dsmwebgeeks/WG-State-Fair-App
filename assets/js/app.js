@@ -211,6 +211,22 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		"pepsi": false,
 		"coke": false
 	};
+	setFilterState();
+
+
+	function setFilterState() {
+		var i = 1;
+		for (cat in $scope.categories) {
+			var toggle = $(".edit-category ul li:nth-child("+i+")");
+
+			if ($scope.categories[cat]) {
+				toggle.attr("class", "active");
+			} else {
+				toggle.attr("class", "disabled");
+			}
+			i = i+1;
+		}
+	}
 
 
 	$scope.toggleCategory = function(item) {
@@ -223,6 +239,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 				categories[cat] = true;
 			}
 		}
+		setFilterState();
 		console.log(categories);
 	};
 
