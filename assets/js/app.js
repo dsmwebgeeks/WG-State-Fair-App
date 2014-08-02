@@ -168,22 +168,14 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		}).error(function() {
 			stopReloadSpin();
 
-			$scope.loadMap();
-
-			// If saved json wasn't randomized it'd be possible to do something like
-			// $scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-			// $scope.vendor = $scope.vendors[$scope.itemId];
-
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
+			$scope.vendor = $scope.vendors[$scope.itemId];	
 
-			for (var i = 0; i < $scope.vendors.length; i++) {
-				if ($scope.vendors[i].id == $scope.itemId) {
-					$scope.vendor = $scope.vendors[i];
-				}
-			}
+			$scope.loadMap();
 
 			console.log("Offline");
 		});	
+		
 	};
 
 
