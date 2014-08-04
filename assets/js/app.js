@@ -211,12 +211,36 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		"pepsi": false,
 		"coke": false
 	};
+	setFilterState();
+
+
+	function setFilterState() {
+		var i = 1;
+		for (cat in $scope.categories) {
+			var toggle = $(".edit-category ul li:nth-child("+i+")");
+
+			if ($scope.categories[cat]) {
+				toggle.attr("class", "active");
+			} else {
+				toggle.attr("class", "disabled");
+			}
+			i = i+1;
+		}
+	}
 
 
 	$scope.toggleCategory = function(item) {
-		for (item in $scope.categories) {
-			console.log(item, $scope.categories[item]);
+		var categories = $scope.categories;
+
+		for (cat in categories) {
+			if (cat === item && categories[cat]) {
+				categories[cat] = false;
+			} else if (cat === item && categories[cat] === false) {
+				categories[cat] = true;
+			}
 		}
+		setFilterState();
+		console.log(categories);
 	};
 
 
