@@ -29,9 +29,9 @@ module.exports = {
   find: function (req, res) {
     'use strict';
 
-    Vendor.find({}).exec(function findCB(err, found){
+    Vendor.find({}).populate('categories').exec(function findCB(err, found){
       return res.json(found);
-    })
+    });
   },
 
   comments: function (req, res) {
@@ -43,7 +43,7 @@ module.exports = {
       Comment.find({vendor: vendor}).exec(function(err, comments) {
         if (err) { return res.badRequest('Vendor ID not found'); }
 				return res.json(comments);  
-      })
+      });
     }
   },
 
