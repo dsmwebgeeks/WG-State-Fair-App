@@ -1,0 +1,50 @@
+<div class="container">
+		<a href="#/vendor/{{vendor.id}}/edit" class="pull-right media-object btn btn-sm btn-warning">
+			<i class="fa fa-pencil"></i> Edit this location
+		</a>
+
+		<div class="media-body">
+			<h1 class="media-heading">{{vendor.name}}</h1>
+			<p>{{vendor.landmark}}</p>
+		</div>
+</div>
+
+<style type="text/css">
+	#leafletMap {
+		height: 250px;
+	}
+</style>
+
+<div class="container">
+	<div id="leafletMap">
+	</div>
+</div>
+
+
+
+
+<div class="container comments">
+	<a href="/auth/twitter" class="btn btn-primary btn-block" ng-hide="userIsLoggedIn">Login via Twitter</a>
+
+	<div class="edit-category">
+		<ul class="list-unordered list-inline">
+			<li class="active"><button ng-click="toggleCategory('beer')" class="btn btn-link">Beer</button></li>
+			<li class="disabled"><button ng-click="toggleCategory('other')" class="btn btn-link">Wine &amp; Spirits</button></li>
+			<li class="disabled"><button ng-click="toggleCategory('old')" class="btn btn-link">Old Fashioned Drinks</button></li>
+			<li class="disabled"><button ng-click="toggleCategory('pepsi')" class="btn btn-link">Pepsi</button></li>
+			<li class="disabled"><button ng-click="toggleCategory('coke')" class="btn btn-link">Coke</button></li>
+		</ul>
+	</div>
+
+	<form ng-submit="addComment()" ng-show="userIsLoggedIn">
+		<textarea class="form-control" rows="3" placeholder="Type your comment" ng-model="comment"></textarea>
+		<input type="submit" value="Add Comment" class="btn btn-success btn-block" />
+	</form>
+
+	<div class="list-group" ng-repeat="comment in comments">
+		<div class="list-group-item">
+			<h4 class="list-group-item-heading">@{{comment.user}}</h4>
+			<p class="list-group-item-text">{{comment.comment}}</p>
+		</div>
+	</div>
+</div>
