@@ -240,12 +240,12 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			"value": value
 		};
 		
-		/*$http.post("/vendor/update", toUpdate)
+		$http.post("/vendor/update", toUpdate)
 		.success(function(data) {
 			console.log(data);
 		}).error(function(err) {
 			console.log(err);
-		});*/
+		});
 		console.log(toUpdate);
 	}
 
