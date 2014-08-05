@@ -11,20 +11,25 @@
 			</div>
 			<div id="filter-list" class="panel-collapse collapse">
 				<div class="panel-body">
-					<p>Select what types of food you'd like to find</p>
-					<div>
-						<label for="hasTurkey">Has Turkey</label>
-						<input type="checkbox" class="switch" name="hasTurkey" ng-model="filters.hasTurkey" ng-change="applyFilters()">
-					</div>
-					<div>
-						<label for="hasBeef">Has Beef</label>
-						<input type="checkbox" name="hasBeef" ng-model="filters.hasBeef" ng-change="applyFilters()">
-					</div>
-					<div>
-						<label for="campbells">Campbell's Con.</label>
-						<input type="checkbox" name="campbells" ng-model="filters.campbells" ng-change="applyFilters()">
-					</div>
+					<p>Select a category you'd like to find</p>
 
+					<ul class="list-inline">
+						<li class="active">
+							<a href="#" class="btn btn-info fa fa-check"> Beer</a>
+						</li>
+						<li class="disabled">
+							<a href="#" class="btn btn-default">Wine &amp; Sprite</a>
+						</li>
+						<li class="active">
+							<a href="#" class="btn btn-info fa fa-check"> Old Fashioned</a>
+						</li>
+						<li class="active">
+							<a href="#" class="btn btn-info fa fa-check"> Coke</a>
+						</li>
+						<li class="active">
+							<a href="#" class="btn btn-info fa fa-check"> Pepsi</a>
+						</li>
+					</ul>
 				</div><!-- End panel body -->
 			</div>
 		</div>
@@ -33,10 +38,8 @@
 	<h1>Search Results</h1>
 	<em>Distances are absolute, and do not consider missing paths, walls, or stubborn people in the way.</em>
 
-	<ul class="list-search-results" ng-repeat="vendor in vendors | orderBy: 'distance'">
-		<!--li class="list-heading">
-			<h2>Searching for {{ITEM_NAME}} <i class="fa fa-clock-o"></i></h2>
-		</li-->
-		<li><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
+	<div class="well bg-info" ng-show="sortingDistances"><i class="fa fa-refresh fa-spin"></i> Sorting by distance</div>
+	<ul class="list-search-results">
+		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
 	</ul>
 </div>
