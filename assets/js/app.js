@@ -18,16 +18,6 @@ app.config(function($routeProvider) {
 
 
 
-function startReloadSpin() {
-	$("a[href=#reload] i").addClass("fa-spin");
-}
-
-function stopReloadSpin() {
-	$("a[href=#reload] i").removeClass("fa-spin");
-}
-
-
-
 app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList = function() {
 		startReloadSpin();
@@ -35,16 +25,15 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		$http.get("/vendor", {
 			timeout: 1000
 		}).success(function(data) {
-			stopReloadSpin();
 
 			$scope.vendors = data;
 			localStorage.setItem("vendorList", JSON.stringify(data));
+			startLoadingIcon();
 			$scope.sortVendors();
 
 			console.log("Online");
 
 		}).error(function() {
-			stopReloadSpin();
 
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 			$scope.sortVendors();
@@ -153,12 +142,9 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.loadVendor = function() {
-		startReloadSpin();
-
 		$http.get("/vendor/"+$scope.itemId, {
 			timeout: 1000
 		}).success(function(data) {
-			stopReloadSpin();
 
 			$scope.vendor = data;	
 			$scope.loadMap();
@@ -166,10 +152,11 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			console.log("Online");
 
 		}).error(function() {
-			stopReloadSpin();
 
-			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-			$scope.vendor = $scope.vendors[$scope.itemId];	
+			//$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
+			//$scope.vendor = $scope.vendors[$scope.itemId];	
+
+			
 
 			$scope.loadMap();
 
@@ -204,13 +191,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	$scope.getComments();
 
 
-	$scope.categories = {
-		"beer": true,
-		"other": false,
-		"old": false,
-		"pepsi": false,
-		"coke": false
-	};
 	setFilterState();
 
 
@@ -230,7 +210,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.toggleCategory = function(item) {
-		var categories = $scope.categories;
+		var categories = $scope.vendor.categories;
 
 		for (cat in categories) {
 			if (cat === item && categories[cat]) {
@@ -278,20 +258,14 @@ app.controller("EditVendorController", function($scope, $http, $routeParams, $lo
 	var itemId = $routeParams.id;
 
 	$scope.loadVendor = function() {
-		startReloadSpin();
-
 		$http.get("/vendor/"+itemId, {
 			timeout: 1000
 		}).success(function(data) {
-			stopReloadSpin();
-
 			$scope.vendor = data;
 			console.log(data);
 
 			console.log("Online");
 		}).error(function() {
-			stopReloadSpin();
-
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 
 			for (var i = 0; i < $scope.vendors.length; i++) {
