@@ -148,6 +148,8 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 			$scope.vendor = data;	
 			$scope.loadMap();
+			
+			setFilterState();
 
 			console.log("Online");
 
@@ -163,6 +165,8 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
  			}
 
 			$scope.loadMap();
+
+			setFilterState();
 
 			console.log("Offline");
 		});	
@@ -195,23 +199,32 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	$scope.getComments();
 
 
-	setFilterState();
 
 
 	function setFilterState() {
 		var i = 1;
-		for (cat in $scope.categories) {
-			var toggle = $(".edit-category ul li:nth-child("+i+")");
+		console.log($scope.vendor);
+		
+		for (cat in $scope.vendor.categories) {
+			var toggle = $(".edit-category ul li:nth-child("+i+") button");
 
-			if ($scope.categories[cat]) {
-				toggle.attr("class", "active");
+			if ($scope.vendor.categories[cat]) {
+				toggle.removeAttr("disabled");
 			} else {
-				toggle.attr("class", "disabled");
+				toggle.attr("disabled", "disabled");
 			}
 			i = i+1;
 		}
+
 	}
 
+	function sendUpdate() {
+		var toUpdate = {
+			"vendorId": $scope.itemId,
+			"category": category,
+			"value": value
+		};
+	}
 
 	$scope.toggleCategory = function(item) {
 		var categories = $scope.vendor.categories;
@@ -219,8 +232,36 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		for (cat in categories) {
 			if (cat === item && categories[cat]) {
 				categories[cat] = false;
+				var toUpdate = {
+					"vendorId": $scope.itemId,
+					"category": cat,
+					"value": categories[cat],
+				};
+
+				console.log(toUpdate);
+
+				/*$http.post("/vendor/update", toUpdate).success(function(data) {
+					console.log(data);
+				}).error(function(err) {
+					console.log(err);
+				});*/
+
 			} else if (cat === item && categories[cat] === false) {
 				categories[cat] = true;
+				var toUpdate = {
+					"vendorId": $scope.itemId,
+					"category": cat,
+					"value": categories[cat],
+				};
+
+				console.log(toUpdate);
+
+
+				/*$http.post("/vendor/update", toUpdate).success(function(data) {
+					console.log(data);
+				}).error(function(err) {
+					console.log(err);
+				});*/
 			}
 		}
 		setFilterState();
