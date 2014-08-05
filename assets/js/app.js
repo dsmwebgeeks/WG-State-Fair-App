@@ -78,7 +78,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			console.log("Got GPS");
 			var lat = position.coords.latitude;
 			var lng = position.coords.longitude;
-			
+
 			//sortDistances(lat, lng);
 			sortDistances(41.59566, -93.55255);
 		}
@@ -89,12 +89,12 @@ app.controller("VendorsController", function($scope, $http, $location) {
 				var vendorPos = [vendor.lat, vendor.lng];
 				var userPos = [lat, lng];
 				var distance = [];
-				
+
 				distance[0] = userPos[0] - vendorPos[0];
 				distance[1] = userPos[1] - vendorPos[1];
 				distance[3] = (distance[0] * distance[0]) + (distance[1] * distance[1]);
 				distance[3] = Math.sqrt(distance[3]);
-					
+
 				vendor.distance = distance[3];
 			}
 
@@ -140,7 +140,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 			$scope.vendors = newList;
 		}
-		
+
 		$scope.sortVendors();
 	};
 
@@ -160,7 +160,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		}).success(function(data) {
 			stopReloadSpin();
 
-			$scope.vendor = data;	
+			$scope.vendor = data;
 			$scope.loadMap();
 
 			console.log("Online");
@@ -169,13 +169,13 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			stopReloadSpin();
 
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-			$scope.vendor = $scope.vendors[$scope.itemId];	
+			$scope.vendor = $scope.vendors[$scope.itemId];
 
 			$scope.loadMap();
 
 			console.log("Offline");
-		});	
-		
+		});
+
 	};
 
 
@@ -273,7 +273,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 });
 
-
+/* NO LONGER IN USE */
 app.controller("EditVendorController", function($scope, $http, $routeParams, $location) {
 	var itemId = $routeParams.id;
 
