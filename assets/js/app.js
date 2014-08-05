@@ -86,18 +86,18 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			var lng = position.coords.longitude;
 
 			// Set global variable
-			// currentLocation = {
-			// 	lat: lat,
-			// 	lng: lng
-			// };
-
 			currentLocation = {
-				lat: 41.59566,
-				lng: -93.55255
+				lat: lat,
+				lng: lng
 			};
 
-			//sortDistances(lat, lng);
-			sortDistances(41.59566, -93.55255);
+			// currentLocation = {
+			// 	lat: 41.59566,
+			// 	lng: -93.55255
+			// };
+
+			sortDistances(lat, lng);
+			// sortDistances(41.59566, -93.55255);
 		}
 
 		function sortDistances(lat, lng) {
@@ -288,6 +288,13 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 			var userIcon = L.divIcon({className: 'fa fa-2x custom-marker fa-user'});
 			var userMarker = L.marker([currentLocation.lat, currentLocation.lng], { icon: userIcon }).addTo(map);
+
+			map.fitBounds([
+			    [$scope.vendor.lat, $scope.vendor.lng],
+			    [currentLocation.lat, currentLocation.lng]
+			], {
+				maxZoom: 19
+			});
 
 			// Tile provider will need to be changed for production
 			L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
