@@ -33,10 +33,8 @@
 	<h1>Search Results</h1>
 	<em>Distances are absolute, and do not consider missing paths, walls, or stubborn people in the way.</em>
 
-	<ul class="list-search-results" ng-repeat="vendor in vendors | orderBy: 'distance'">
-		<!--li class="list-heading">
-			<h2>Searching for {{ITEM_NAME}} <i class="fa fa-clock-o"></i></h2>
-		</li-->
-		<li><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
+	<div class="well bg-info" ng-show="sortingDistances"><i class="fa fa-refresh fa-spin"></i> Sorting by distance</div>
+	<ul class="list-search-results">
+		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
 	</ul>
 </div>

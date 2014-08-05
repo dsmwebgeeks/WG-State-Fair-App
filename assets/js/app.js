@@ -29,6 +29,9 @@ function stopReloadSpin() {
 
 
 app.controller("VendorsController", function($scope, $http, $location) {
+	// Set our state of sorting vendors to true by default
+	$scope.sortingDistances = true;
+
 	$scope.loadList = function() {
 		startReloadSpin();
 
@@ -61,6 +64,8 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		navigator.geolocation.getCurrentPosition(gotGPS, errorGPS);
 
 		function errorGPS(err) {
+			$scope.sortingDistances = false;
+
 			switch (err.code) {
 				case 1:
 					console.log("User denied permission");
@@ -78,7 +83,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			console.log("Got GPS");
 			var lat = position.coords.latitude;
 			var lng = position.coords.longitude;
-			
+
 			//sortDistances(lat, lng);
 			sortDistances(41.59566, -93.55255);
 		}
@@ -89,14 +94,16 @@ app.controller("VendorsController", function($scope, $http, $location) {
 				var vendorPos = [vendor.lat, vendor.lng];
 				var userPos = [lat, lng];
 				var distance = [];
-				
+
 				distance[0] = userPos[0] - vendorPos[0];
 				distance[1] = userPos[1] - vendorPos[1];
 				distance[3] = (distance[0] * distance[0]) + (distance[1] * distance[1]);
 				distance[3] = Math.sqrt(distance[3]);
-					
+
 				vendor.distance = distance[3];
 			}
+
+			$scope.sortingDistances = false;
 
 			$scope.$apply();
 			console.log($scope.vendors[4]);
@@ -140,7 +147,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 			$scope.vendors = newList;
 		}
-		
+
 		$scope.sortVendors();
 	};
 
@@ -160,7 +167,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		}).success(function(data) {
 			stopReloadSpin();
 
-			$scope.vendor = data;	
+			$scope.vendor = data;
 			$scope.loadMap();
 
 			console.log("Online");
@@ -169,13 +176,13 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			stopReloadSpin();
 
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-			$scope.vendor = $scope.vendors[$scope.itemId];	
+			$scope.vendor = $scope.vendors[$scope.itemId];
 
 			$scope.loadMap();
 
 			console.log("Offline");
-		});	
-		
+		});
+
 	};
 
 
@@ -261,19 +268,26 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.loadMap = function() {
-		var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
-		var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
 
-		// Tile provider will need to be changed for production
-		L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-			attribution: "Map Attribution",
-			maxZoom: 19
-		}).addTo(map);
+		// If Leaflet hasn't loaded, wait for it
+		if ( typeof(L) !== 'undefined' ) {
+			var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
+			var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
+
+			// Tile provider will need to be changed for production
+			L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				attribution: "Map Attribution",
+				maxZoom: 19
+			}).addTo(map);
+		} else {
+			// Keep trying every second
+			setTimeout($scope.loadMap, 1000);
+		}
 	};
 
 });
 
-
+/* NO LONGER IN USE */
 app.controller("EditVendorController", function($scope, $http, $routeParams, $location) {
 	var itemId = $routeParams.id;
 
@@ -327,3 +341,9 @@ app.controller("EditVendorController", function($scope, $http, $routeParams, $lo
 
 	$scope.loadVendor();
 });
+
+// Load CSS asychronously for slower connections (so users will still see content)
+function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
+
+loadCSS('http://fonts.googleapis.com/css?family=Ubuntu');
+loadCSS('/css/font-awesome.min.css');
