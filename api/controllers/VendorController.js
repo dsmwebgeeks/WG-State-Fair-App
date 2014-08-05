@@ -15,9 +15,14 @@ module.exports = {
    */
   update: function (req, res) {
     'use strict';
-    return res.json({
-      todo: 'update() is not implemented yet!'
-    });
+
+    if(!req.user){
+      res.forbidden("You must be logged in!");
+    } else {
+      return res.json({
+        todo: 'update() is not implemented yet!'
+      }); 
+    }
   },
 
   /**
