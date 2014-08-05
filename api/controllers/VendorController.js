@@ -5,9 +5,6 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-var _ = require('underscore');
-
-
 module.exports = {
 
   /**
@@ -17,11 +14,24 @@ module.exports = {
     'use strict';
 
     if(!req.user){
-      res.forbidden("You must be logged in!");
+      res.forbidden('You must be logged in!');
     } else {
-      return res.json({
-        todo: 'update() is not implemented yet!'
-      }); 
+      var vendor = req.param('vendorId');
+      if(!vendor) {
+        res.badRequest('You must specify a vendor!');
+      } else {
+        Category.find({vendor: vendor}, function(err, category) {
+          if(err || !category) {
+            res.badRequest('Invalid vendor!');
+          } else {
+            // figuring out what category to update
+
+            return res.json({
+              todo: 'update() is not implemented yet!'
+            });            
+          }
+        });
+      }
     }
   },
 
