@@ -10,47 +10,6 @@ module.exports = {
   /**
    * `VendorController.update()`
    */
-  /*
-  update: function (req, res) {
-    'use strict';
-
-    if(!req.user){
-      res.forbidden('You must be logged in!');
-    } else {
-      var vendor = req.param('vendorId');
-      if(!vendor) {
-        res.badRequest('You must specify a vendor!');
-      } else {
-        Category.find({vendor: vendor}, function(err, category) {
-          if(err || !category) {
-            res.badRequest('Invalid vendor!');
-          } else {
-            // what category are we updating?
-            var categoryToUpdate = req.param('category');
-            var categoryValue = req.param('value');
-            // update or create?
-            if(!category.length) {
-              var data = {};
-              data['vendor'] = vendor;
-              data[categoryToUpdate] = categoryValue;
-              category = Category.create(data);
-            } else {
-              category[categoryToUpdate] = categoryValue;
-            }
-
-            category.save(function(err, category){
-              if(err) {
-                res.badRequest("Unspecified error");
-              } else {
-                return res.json(category);                
-              }
-            })
-          }
-        });
-      }
-    }
-  },
-  */
   update: function(req, res) {
     'use strict';
 
