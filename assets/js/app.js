@@ -218,12 +218,10 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	function setFilterState() {
 		var cats = $scope.vendor.categories;
 		var i = 1;
-		console.log($scope.vendor);
 		
 		for (cat in cats) {
 			if (typeof cats[cat] !== "boolean") { continue; }
 			var toggle = $(".edit-category ul li:nth-child("+i+") button");
-			console.log(cats[cat]);
 
 			if ($scope.vendor.categories[cat] === true) {
 				toggle.removeClass("inactive");
