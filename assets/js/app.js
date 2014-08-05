@@ -108,16 +108,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 		$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 
-		/*if ($scope.filters.hasTurkey) {
-			filterRegex[0] = /turkey/ig;
-		}
-		if($scope.filters.hasBeef) {
-			filterRegex[1] = /beef/ig;
-		}
-		if($scope.filters.campbells) {
-			filterRegex[2] = /campbell's/ig;
-		}*/
-
 		if (filter === "beer") {
 			filterRegex[0] = /turkey/ig;
 		}
@@ -232,12 +222,19 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 	}
 
-	function sendUpdate() {
+	function sendUpdate(category, value) {
 		var toUpdate = {
 			"vendorId": $scope.itemId,
 			"category": category,
 			"value": value
 		};
+		
+		$http.post("/vendor/update", toUpdate)
+		.success(function(data) {
+			console.log(data);
+		}).error(function(err) {
+			console.log(err);
+		});
 	}
 
 	$scope.toggleCategory = function(item) {
@@ -246,40 +243,16 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		for (cat in categories) {
 			if (cat === item && categories[cat]) {
 				categories[cat] = false;
-				var toUpdate = {
-					"vendorId": $scope.itemId,
-					"category": cat,
-					"value": categories[cat],
-				};
 
-				console.log(toUpdate);
-
-				/*$http.post("/vendor/update", toUpdate).success(function(data) {
-					console.log(data);
-				}).error(function(err) {
-					console.log(err);
-				});*/
+				sendUpdate(cat, categories[cat]);
 
 			} else if (cat === item && categories[cat] === false) {
 				categories[cat] = true;
-				var toUpdate = {
-					"vendorId": $scope.itemId,
-					"category": cat,
-					"value": categories[cat],
-				};
 
-				console.log(toUpdate);
-
-
-				/*$http.post("/vendor/update", toUpdate).success(function(data) {
-					console.log(data);
-				}).error(function(err) {
-					console.log(err);
-				});*/
+				sendUpdate(cat, categories[cat]);
 			}
 		}
 		setFilterState();
-		console.log(categories);
 	};
 
 

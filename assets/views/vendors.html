@@ -15,7 +15,7 @@
 
 					<ul class="list-inline">
 						<li class="active">
-							<button type="button" class="btn btn-info fa fa-check" ng-click="applyFilters('beer')"> Beer</button>
+							<button type="button" class="btn btn-info fa fa-check" ng-click="applyFilters('beer')">Beer</button>
 						</li>
 						<li class="disabled">
 							<button class="btn btn-default" ng-click="applyFilters('otherAlcohol')">Wine &amp; Sprite</button>
@@ -40,6 +40,6 @@
 
 	<div class="well bg-info" ng-show="sortingDistances"><i class="fa fa-refresh fa-spin"></i> Sorting by distance</div>
 	<ul class="list-search-results">
-		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
+		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}<br><small class="text-muted">{{vendor.landmark}}</small></a></li>
 	</ul>
 </div>
