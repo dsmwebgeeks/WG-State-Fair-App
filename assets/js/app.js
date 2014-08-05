@@ -1,4 +1,5 @@
 var app = angular.module("fairDrinks", ["ngRoute"]);
+var currentLocation;
 
 app.config(function($routeProvider) {
 	$routeProvider
@@ -70,8 +71,19 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			var lat = position.coords.latitude;
 			var lng = position.coords.longitude;
 
-			//sortDistances(lat, lng);
-			sortDistances(41.59566, -93.55255);
+			// Set global variable
+			currentLocation = {
+				lat: lat,
+				lng: lng
+			};
+
+			// currentLocation = {
+			// 	lat: 41.59566,
+			// 	lng: -93.55255
+			// };
+
+			sortDistances(lat, lng);
+			// sortDistances(41.59566, -93.55255);
 		}
 
 		function sortDistances(lat, lng) {
@@ -278,6 +290,16 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		if ( typeof(L) !== 'undefined' ) {
 			var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
 			var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
+
+			var userIcon = L.divIcon({className: 'fa fa-2x custom-marker fa-user'});
+			var userMarker = L.marker([currentLocation.lat, currentLocation.lng], { icon: userIcon }).addTo(map);
+
+			map.fitBounds([
+			    [$scope.vendor.lat, $scope.vendor.lng],
+			    [currentLocation.lat, currentLocation.lng]
+			], {
+				maxZoom: 19
+			});
 
 			// Tile provider will need to be changed for production
 			L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
