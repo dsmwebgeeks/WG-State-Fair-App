@@ -45,9 +45,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 
 	$scope.sortVendors = function() {
-		// Should moernizr throw an error if no GPS?
-		// Should high accuracy be enabled?
-		// What about refreshing list?
 		navigator.geolocation.getCurrentPosition(gotGPS, errorGPS);
 
 		function errorGPS(err) {
@@ -55,13 +52,13 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 			switch (err.code) {
 				case 1:
-					console.log("User denied permission");
+					alert("Can't sort position");
 					break;
 				case 2:
-					console.log("Position unavailable");
+					alert("Your position is unavailable");
 					break;
 				case 3:
-					console.log("Timed out getting position");
+					alert("Timed out getting your position");
 					break;
 			}
 		}
