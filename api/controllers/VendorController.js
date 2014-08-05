@@ -24,11 +24,26 @@ module.exports = {
           if(err || !category) {
             res.badRequest('Invalid vendor!');
           } else {
-            // figuring out what category to update
+            // what category are we updating?
+            var categoryToUpdate = req.param('category');
+            var categoryValue = req.param('value');
+            // update or create?
+            if(!category.length) {
+              var data = {};
+              data['vendor'] = vendor;
+              data[categoryToUpdate] = categoryValue;
+              category = Category.create(data);
+            } else {
+              category[categoryToUpdate] = categoryValue;
+            }
 
-            return res.json({
-              todo: 'update() is not implemented yet!'
-            });            
+            category.exec(function(err, category){
+              if(err) {
+                res.badRequest("Unspecified error");
+              } else {
+                return res.json(category);                
+              }
+            })
           }
         });
       }
