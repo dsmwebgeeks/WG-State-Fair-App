@@ -261,14 +261,21 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.loadMap = function() {
-		var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
-		var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
 
-		// Tile provider will need to be changed for production
-		L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-			attribution: "Map Attribution",
-			maxZoom: 19
-		}).addTo(map);
+		// If Leaflet hasn't loaded, wait for it
+		if ( typeof(L) !== 'undefined' ) {
+			var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
+			var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
+
+			// Tile provider will need to be changed for production
+			L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				attribution: "Map Attribution",
+				maxZoom: 19
+			}).addTo(map);
+		} else {
+			// Keep trying every second
+			setTimeout($scope.loadMap, 1000);
+		}
 	};
 
 });
