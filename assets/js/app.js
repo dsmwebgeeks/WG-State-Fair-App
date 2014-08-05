@@ -110,38 +110,40 @@ app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList();
 
 
+	$scope.filterBy = [];
 	$scope.applyFilters = function(filter) {
 		var filterCount = 0;
 		var newList = [];
-		var filterRegex = [];
 
 		$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-
+		
 		if (filter === "beer") {
-			filterRegex[0] = /turkey/ig;
+			$scope.filterBy[0] = "beer";
+		} else if (filter === "otherAlcohol") {
+			$scope.filterBy[1] = "otherAlcohol";
+		} else if (filter === "oldFashioned") {
+			$scope.filterBy[2] = "oldFashioned";
+		} else if (filter === "coke") {
+			$scope.filterBy[3] = "coke";
+		} else if (filter === "pepsi") {
+			$scope.filterBy[4] = "pepsi";
 		}
-		if (filter === "otherAlcohol") {
-			filterRegex[1] = /beef/ig;
-		}
-		if (filter === "oldFashioned") {
-			filterRegex[2] = /campbell's/ig;
-		}
-
-		if (filterRegex.length !== 0) {
-
-			for (var j = 0; j < filterRegex.length; j++) {
+		
+		if ($scope.filterBy.length !== 0) {
+			for (var j = 0; j < $scope.filterBy.length; j++) {
 				for (var i = 0; i < $scope.vendors.length; i++) {
-
-					if (filterRegex[j] && filterRegex[j].test($scope.vendors[i].name)) {
+					if ($scope.filterBy[j] && $scope.vendors[i].categories[$scope.filterBy[j]] && !$scope.vendors[i].inList) {
+						$scope.vendors[i].inList = true;
+						// saying in list to prevent duplicates in filter list
 						newList[filterCount] = $scope.vendors[i];
 						filterCount = filterCount + 1;
 					}
-
 				}
 			}
 
 			$scope.vendors = newList;
 		}
+
 
 		$scope.sortVendors();
 	};
