@@ -29,6 +29,9 @@ function stopReloadSpin() {
 
 
 app.controller("VendorsController", function($scope, $http, $location) {
+	// Set our state of sorting vendors to true by default
+	$scope.sortingDistances = true;
+
 	$scope.loadList = function() {
 		startReloadSpin();
 
@@ -61,6 +64,8 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		navigator.geolocation.getCurrentPosition(gotGPS, errorGPS);
 
 		function errorGPS(err) {
+			$scope.sortingDistances = false;
+
 			switch (err.code) {
 				case 1:
 					console.log("User denied permission");
@@ -97,6 +102,8 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 				vendor.distance = distance[3];
 			}
+
+			$scope.sortingDistances = false;
 
 			$scope.$apply();
 			console.log($scope.vendors[4]);
