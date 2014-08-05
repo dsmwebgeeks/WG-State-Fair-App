@@ -88,3 +88,10 @@ a.text-white {
 .comments form {
   margin-bottom: 20px;
 }
+
+
+.custom-marker {
+  text-shadow: 5px 4px 10px rgba(0,0,0,.25);
+  color: #003399;
+  font-size: 1.2em;
+}
