@@ -29,7 +29,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 			$scope.vendors = data;
 			localStorage.setItem("vendorList", JSON.stringify(data));
-			startLoadingIcon();
 			$scope.sortVendors();
 
 			console.log("Online");
@@ -102,20 +101,30 @@ app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList();
 
 
-	$scope.applyFilters = function() {
+	$scope.applyFilters = function(filter) {
 		var filterCount = 0;
 		var newList = [];
 		var filterRegex = [];
 
 		$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 
-		if ($scope.filters.hasTurkey) {
+		/*if ($scope.filters.hasTurkey) {
 			filterRegex[0] = /turkey/ig;
 		}
 		if($scope.filters.hasBeef) {
 			filterRegex[1] = /beef/ig;
 		}
 		if($scope.filters.campbells) {
+			filterRegex[2] = /campbell's/ig;
+		}*/
+
+		if (filter === "beer") {
+			filterRegex[0] = /turkey/ig;
+		}
+		if (filter === "otherAlcohol") {
+			filterRegex[1] = /beef/ig;
+		}
+		if (filter === "oldFashioned") {
 			filterRegex[2] = /campbell's/ig;
 		}
 
