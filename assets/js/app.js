@@ -314,54 +314,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 });
 
-/* NO LONGER IN USE */
-app.controller("EditVendorController", function($scope, $http, $routeParams, $location) {
-	var itemId = $routeParams.id;
-
-	$scope.loadVendor = function() {
-		$http.get("/vendor/"+itemId, {
-			timeout: 1000
-		}).success(function(data) {
-			$scope.vendor = data;
-			console.log(data);
-
-			console.log("Online");
-		}).error(function() {
-			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-
-			for (var i = 0; i < $scope.vendors.length; i++) {
-				if ($scope.vendors[i].id == itemId) {
-					$scope.vendor = $scope.vendors[i];
-				}
-			}
-
-			console.log("Offline");
-		});
-	};
-
-	$scope.updateVendor = function() {
-		console.log("Update");
-
-		var name = $scope.vendor.name;
-		var landmark = $scope.vendor.landmark;
-		var lat = $scope.vendor.lat;
-		var lng = $scope.vendor.ng;
-
-		$http.put("/vendor/"+itemId, {
-			name: name,
-			landmark: landmark,
-			lat: lat,
-			lng: lng
-		}).success(function(data) {
-			console.log(data);
-			$location.path("/vendor/"+itemId);
-		}).error(function(data) {
-			console.log(data);
-		});
-	};
-
-	$scope.loadVendor();
-});
 
 // Load CSS asychronously for slower connections (so users will still see content)
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
