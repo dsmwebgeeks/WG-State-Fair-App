@@ -215,19 +215,20 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 	$scope.getComments();
 
 
-
-
 	function setFilterState() {
+		var cats = $scope.vendor.categories;
 		var i = 1;
 		console.log($scope.vendor);
 		
-		for (cat in $scope.vendor.categories) {
+		for (cat in cats) {
+			if (typeof cats[cat] !== "boolean") { continue; }
 			var toggle = $(".edit-category ul li:nth-child("+i+") button");
+			console.log(cats[cat]);
 
-			if ($scope.vendor.categories[cat]) {
-				toggle.removeAttr("disabled");
+			if ($scope.vendor.categories[cat] === true) {
+				toggle.removeClass("inactive");
 			} else {
-				toggle.attr("disabled", "disabled");
+				toggle.addClass("inactive");
 			}
 			i = i+1;
 		}
@@ -241,19 +242,20 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			"value": value
 		};
 		
-		$http.post("/vendor/update", toUpdate)
+		/*$http.post("/vendor/update", toUpdate)
 		.success(function(data) {
 			console.log(data);
 		}).error(function(err) {
 			console.log(err);
-		});
+		});*/
+		console.log(toUpdate);
 	}
 
 	$scope.toggleCategory = function(item) {
 		var categories = $scope.vendor.categories;
 
 		for (cat in categories) {
-			if (cat === item && categories[cat]) {
+			if (cat === item && categories[cat] === true) {
 				categories[cat] = false;
 
 				sendUpdate(cat, categories[cat]);
