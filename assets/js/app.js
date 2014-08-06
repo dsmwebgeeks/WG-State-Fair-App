@@ -33,14 +33,11 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			localStorage.setItem("vendorList", JSON.stringify(data));
 			$scope.sortVendors();
 
-			console.log("Online");
-
 		}).error(function() {
 
 			$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 			$scope.sortVendors();
-
-			console.log("Offline");
+			alert("List loaded offline, and may not be very current");
 		});
 	};
 
@@ -65,7 +62,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		}
 
 		function gotGPS(position) {
-			console.log("Got GPS");
 			var lat = position.coords.latitude;
 			var lng = position.coords.longitude;
 
@@ -102,8 +98,6 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			$scope.sortingDistances = false;
 
 			$scope.$apply();
-			console.log($scope.vendors[4]);
-			console.log("Finished getting distances");
 		}
 	};
 
@@ -178,14 +172,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			$scope.loadMap();
 			
 			setFilterState();
-
-			console.log("Online");
-
 		}).error(function() {
-
-			//$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
-			//$scope.vendor = $scope.vendors[$scope.itemId];	
-
 			for (var i = 0; i < $scope.vendors.length; i++) {
  				if ($scope.vendors[i].id == $scope.itemId) {
  					$scope.vendor = $scope.vendors[i];
@@ -193,12 +180,9 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
  			}
 
 			$scope.loadMap();
-
 			setFilterState();
-
-			console.log("Offline");
+			alert("Page loaded offline; vender categories may not be up to date");
 		});
-
 	};
 
 
