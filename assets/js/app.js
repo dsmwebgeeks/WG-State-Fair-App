@@ -26,7 +26,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 
 	$scope.loadList = function() {
 		$http.get("/vendor", {
-			timeout: 1000
+			timeout: 25000
 		}).success(function(data) {
 
 			$scope.vendors = data;
@@ -165,7 +165,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 	$scope.loadVendor = function() {
 		$http.get("/vendor/"+$scope.itemId, {
-			timeout: 1000
+			timeout: 25000
 		}).success(function(data) {
 
 			$scope.vendor = data;
