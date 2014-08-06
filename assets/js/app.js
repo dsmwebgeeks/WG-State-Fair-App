@@ -118,10 +118,15 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
 
 		function setFilterBy(i, cat) {
+			var clickedButton = $("#filter-list ul li:nth-child("+(i+1)+") button");
 			if ($scope.filterBy[i]) {
 				$scope.filterBy[i] = null;
+				clickedButton.removeAttr("class");
+				clickedButton.addClass("btn btn-default");
 			} else {
 				$scope.filterBy[i] = cat;
+				clickedButton.removeAttr("class");
+				clickedButton.addClass("btn btn-info fa fa-check");
 			}
 		}
 		
