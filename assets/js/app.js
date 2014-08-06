@@ -130,22 +130,20 @@ app.controller("VendorsController", function($scope, $http, $location) {
 			setFilterBy(4, "pepsi");
 		}
 		
-		if ($scope.filterBy.length !== 0) {
-			for (var j = 0; j < $scope.filterBy.length; j++) {
-				for (var i = 0; i < $scope.vendors.length; i++) {
-					if ($scope.filterBy[j] && $scope.vendors[i].categories[$scope.filterBy[j]] && !$scope.vendors[i].inList) {
-						$scope.vendors[i].inList = true;
-						// saying in list to prevent duplicates in filter list
-						newList[filterCount] = $scope.vendors[i];
-						filterCount = filterCount + 1;
-					}
+		for (var j = 0; j < $scope.filterBy.length; j++) {
+			for (var i = 0; i < $scope.vendors.length; i++) {
+				if ($scope.filterBy[j] && $scope.vendors[i].categories[$scope.filterBy[j]] && !$scope.vendors[i].inList) {
+					$scope.vendors[i].inList = true;
+					// saying in list to prevent duplicates in filter list
+					newList[filterCount] = $scope.vendors[i];
+					filterCount = filterCount + 1;
 				}
 			}
-
-			$scope.vendors = newList;
 		}
 
-
+		if (newList.length !== 0) {
+			$scope.vendors = newList;
+		}
 		$scope.sortVendors();
 	};
 
