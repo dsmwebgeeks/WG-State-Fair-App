@@ -76,6 +76,6 @@ a.text-white {
   font-size: 1.2em;
 }
 .inactive {
-  text-decoration: line-through;
-  color: #f5ae95;
+  text-decoration: line-through !important;
+  color: #f5ae95 !important;
 }
