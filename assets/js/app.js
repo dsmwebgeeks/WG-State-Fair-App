@@ -22,6 +22,7 @@ app.config(function($routeProvider) {
 app.controller("VendorsController", function($scope, $http, $location) {
 	// Set our state of sorting vendors to true by default
 	$scope.sortingDistances = true;
+	$scope.filterBy = [];
 
 	$scope.loadList = function() {
 		$http.get("/vendor", {
@@ -110,23 +111,30 @@ app.controller("VendorsController", function($scope, $http, $location) {
 	$scope.loadList();
 
 
-	$scope.filterBy = [];
 	$scope.applyFilters = function(filter) {
 		var filterCount = 0;
 		var newList = [];
 
 		$scope.vendors = JSON.parse(localStorage.getItem("vendorList"));
+
+		function setFilterBy(i, cat) {
+			if ($scope.filterBy[i]) {
+				$scope.filterBy[i] = null;
+			} else {
+				$scope.filterBy[i] = cat;
+			}
+		}
 		
 		if (filter === "beer") {
-			$scope.filterBy[0] = "beer";
+			setFilterBy(0, "beer");
 		} else if (filter === "otherAlcohol") {
-			$scope.filterBy[1] = "otherAlcohol";
+			setFilterBy(1, "otherAlcohol");
 		} else if (filter === "oldFashioned") {
-			$scope.filterBy[2] = "oldFashioned";
+			setFilterBy(2, "oldFashioned");
 		} else if (filter === "coke") {
-			$scope.filterBy[3] = "coke";
+			setFilterBy(3, "coke");
 		} else if (filter === "pepsi") {
-			$scope.filterBy[4] = "pepsi";
+			setFilterBy(4, "pepsi");
 		}
 		
 		if ($scope.filterBy.length !== 0) {
