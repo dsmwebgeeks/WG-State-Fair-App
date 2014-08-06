@@ -191,6 +191,7 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		.success(function(data) {
 			$scope.comments = data.reverse();
 		}).error(function(err) {
+			alert("Error getting comments");
 			console.log(err);
 		});
 	};
