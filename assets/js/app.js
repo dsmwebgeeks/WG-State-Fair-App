@@ -166,9 +166,10 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			
 			setFilterState();
 		}).error(function() {
-			for (var i = 0; i < $scope.vendors.length; i++) {
- 				if ($scope.vendors[i].id == $scope.itemId) {
- 					$scope.vendor = $scope.vendors[i];
+			var vendors = JSON.parse(localStorage.getItem("vendorList"));			
+			for (var i = 0; i < vendors.length; i++) {
+ 				if (vendors[i].id == $scope.itemId) {
+ 					$scope.vendor = vendors[i];
  				}
  			}
 
