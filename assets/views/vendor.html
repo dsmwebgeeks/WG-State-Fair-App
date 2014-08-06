@@ -1,0 +1,43 @@
+<div class="container">
+		<div class="media-body">
+			<h1 class="media-heading">{{vendor.name}}</h1>
+			<p>{{vendor.landmark}}</p>
+		</div>
+</div>
+
+
+<div class="container">
+	<div id="leafletMap">
+	</div>
+</div>
+
+
+
+
+<div class="container comments">
+	<div class="edit-category">
+		<p>This vendor sells</p>
+		<ul class="list-unordered list-inline">
+			<li><button ng-click="toggleCategory('beer')" class="btn btn-link">Beer</button></li>
+			<li><button ng-click="toggleCategory('otherAlcohol')" class="btn btn-link">Wine &amp; Spirits</button></li>
+			<li><button ng-click="toggleCategory('oldFashioned')" class="btn btn-link">Old Fashioned Drinks</button></li>
+			<li><button ng-click="toggleCategory('pepsi')" class="btn btn-link">Pepsi</button></li>
+			<li><button ng-click="toggleCategory('coke')" class="btn btn-link">Coke</button></li>
+		</ul>
+	</div>
+
+	<em class="text-muted" ng-hide="userIsLoggedIn">Login to add a comment or change the category of the vendor</em>
+	<a href="/auth/twitter" class="btn btn-primary btn-block" ng-hide="userIsLoggedIn">Login via Twitter</a>
+
+	<form ng-submit="addComment()" ng-show="userIsLoggedIn">
+		<textarea class="form-control" rows="3" placeholder="Type your comment" ng-model="comment"></textarea>
+		<input type="submit" value="Add Comment" class="btn btn-success btn-block" />
+	</form>
+
+	<div class="list-group">
+		<div class="list-group-item" ng-repeat="comment in comments">
+			<h4 class="list-group-item-heading">@{{comment.user}}</h4>
+			<p class="list-group-item-text">{{comment.comment}}</p>
+		</div>
+	</div>
+</div>

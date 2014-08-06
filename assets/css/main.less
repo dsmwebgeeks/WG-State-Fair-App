@@ -1,0 +1,101 @@
+
+/* ===================================================================== */
+// Global Styles
+/* ===================================================================== */
+.m-top {margin-top: 25px}
+.m-right {margin-right: 25px}
+.m-bottom {margin-bottom: 25px}
+.m-left {margin-left: 25px}
+
+
+/* ===================================================================== */
+// Primary Styles
+/* ===================================================================== */
+body {
+  padding-top: 70px;
+}
+
+
+//
+// Lists
+// --------------------------------------------------
+ul.list-search-results {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  li {
+    margin-bottom: 7px;
+    &.list-heading {
+      background-color: #C1302B;
+      color: #fff;
+      h2 {
+        font-size: 22px;
+        margin: 0;
+        line-height: 60px;
+        padding: 0 15px;
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+    }
+    a {
+      padding: 7px 10px;
+      border-color: #ccc;
+      color: #414062;
+      display: block;
+      margin: 0;
+      text-decoration: none;
+      border-bottom: 1px dotted #999;
+      &:hover {
+        color: #E74B43;
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+//
+// Filter panel
+// --------------------------------------------------
+.panel-title {
+  >a:before {
+	  font-family: "FontAwesome";
+	  content: "\f0d7";
+  }
+}
+.panel-title {
+  >.collapsed:before {
+  	font-family: "FontAwesome";
+  	content: "\f0da";
+  }
+}
+
+.text-white, a.text-white {
+	color: white;
+}
+
+.comments {
+	margin-top: 25px;
+	form {
+		margin-bottom: 20px;
+	}
+  a[href="/auth/twitter"] {
+    margin-bottom: 20px;
+  }
+}
+
+#leafletMap {
+  height: 250px;
+}
+
+// Leaflet custom markets
+.custom-marker {
+  text-shadow: 5px 4px 10px rgba(0,0,0,.25);
+  color: #003399;
+  font-size: 1.2em;
+}
+
+// Category buttons
+.inactive {
+  text-decoration: line-through !important;
+  color: lighten(#DD4814, 30%) !important;
+}
+

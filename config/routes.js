@@ -22,6 +22,17 @@
 
 module.exports.routes = {
 
+  'get /login': 'AuthController.login',
+  'get /logout': 'AuthController.logout',
+  'get /register': 'AuthController.register',
+
+  'post /auth/local': 'AuthController.callback',
+  'post /auth/local/:action': 'AuthController.callback',
+
+  'get /auth/:provider': 'AuthController.provider',
+  'get /auth/:provider/callback': 'AuthController.callback',
+
+  'get /isLoggedIn': 'AuthController.isLoggedIn',
 
   // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
   // default view engine) your home page.
@@ -31,6 +42,21 @@ module.exports.routes = {
     view: 'homepage'
   },
 
+  // '/search': {
+  //   view: 'search'
+  // },
+
+  // '/vendor/num': {
+  //   view: 'vendor'
+  // },
+
+  // '/vendor/edit': {
+  //   view: 'vendor-edit'
+  // },
+
+  '/vendor/:vendor/comments': 'VendorController.comments',
+  //'/vendor/:vendor/addcomment': 'VendorController.addcomment',
+
 
   // Custom routes here...
 
@@ -38,6 +64,7 @@ module.exports.routes = {
     controller: 'cache',
     action: 'manifest'
   }
+
 
   // If a request to a URL doesn't match any of the custom routes above,
   // it is matched against Sails route blueprints.  See `config/blueprints.js`

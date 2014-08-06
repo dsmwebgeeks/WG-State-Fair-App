@@ -1,0 +1,84 @@
+/* ===================================================================== */
+/* ===================================================================== */
+.m-top {
+  margin-top: 25px;
+}
+.m-right {
+  margin-right: 25px;
+}
+.m-bottom {
+  margin-bottom: 25px;
+}
+.m-left {
+  margin-left: 25px;
+}
+/* ===================================================================== */
+/* ===================================================================== */
+body {
+  padding-top: 70px;
+}
+ul.list-search-results {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+ul.list-search-results li {
+  margin-bottom: 7px;
+}
+ul.list-search-results li.list-heading {
+  background-color: #C1302B;
+  color: #fff;
+}
+ul.list-search-results li.list-heading h2 {
+  font-size: 22px;
+  margin: 0;
+  line-height: 60px;
+  padding: 0 15px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+ul.list-search-results li a {
+  padding: 7px 10px;
+  border-color: #ccc;
+  color: #414062;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+}
+ul.list-search-results li a:hover {
+  color: #E74B43;
+  background-color: transparent;
+}
+.panel-title > a:before {
+  font-family: "FontAwesome";
+  content: "\f0d7";
+}
+.panel-title > .collapsed:before {
+  font-family: "FontAwesome";
+  content: "\f0da";
+}
+.text-white,
+a.text-white {
+  color: white;
+}
+.comments {
+  margin-top: 25px;
+}
+.comments form {
+  margin-bottom: 20px;
+}
+.comments a[href="/auth/twitter"] {
+  margin-bottom: 20px;
+}
+#leafletMap {
+  height: 250px;
+}
+.custom-marker {
+  text-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
+  color: #003399;
+  font-size: 1.2em;
+}
+.inactive {
+  text-decoration: line-through !important;
+  color: #f5ae95 !important;
+}
