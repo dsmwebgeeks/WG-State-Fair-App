@@ -75,6 +75,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 		}
 
 		function sortDistances(lat, lng) {
+			$scope.sortingDistances = true;
 			for (var i = 0; i < $scope.vendors.length; i++) {
 				var vendor = $scope.vendors[i];
 				var vendorPos = [vendor.lat, vendor.lng];
@@ -283,19 +284,23 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
 			var vendorMarker = L.marker([$scope.vendor.lat, $scope.vendor.lng]).addTo(map);
 
-			var userIcon = L.divIcon({className: 'fa fa-2x custom-marker fa-user'});
-			var userMarker = L.marker([currentLocation.lat, currentLocation.lng], { icon: userIcon }).addTo(map);
 
-			map.fitBounds([
-			    [$scope.vendor.lat, $scope.vendor.lng],
-			    [currentLocation.lat, currentLocation.lng]
-			], {
-				maxZoom: 19
-			});
+			try {
+				var userIcon = L.divIcon({className: 'fa fa-2x custom-marker fa-user'});
+				var userMarker = L.marker([currentLocation.lat, currentLocation.lng], { icon: userIcon }).addTo(map);
+				map.fitBounds([
+			  	  [$scope.vendor.lat, $scope.vendor.lng],
+			    	[currentLocation.lat, currentLocation.lng]
+				], {
+					maxZoom: 19
+				});
+			} catch (err) {
+				console.log(err);
+			}
 
 			// Tile provider will need to be changed for production
 			L.tileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-				attribution: "Map Attribution",
+				attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 				maxZoom: 19
 			}).addTo(map);
 		} else {
