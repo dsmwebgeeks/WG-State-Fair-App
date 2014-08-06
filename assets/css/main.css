@@ -67,6 +67,9 @@ a.text-white {
 .comments form {
   margin-bottom: 20px;
 }
+.comments a[href="/auth/twitter"] {
+  margin-bottom: 20px;
+}
 #leafletMap {
   height: 250px;
 }
