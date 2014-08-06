@@ -238,11 +238,11 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		
 		$http.post("/vendor/update", toUpdate)
 		.success(function(data) {
-			console.log(data);
 			if (data.error) {
 				alert(data.error);
 			}
 		}).error(function(err) {
+			alert("Error sending update");
 			console.log(err);
 		});
 	}
@@ -278,9 +278,9 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 			comment: $scope.comment
 		})
 		.success(function(data) {
-			console.log(data);
 			$scope.getComments();
 		}).error(function(err) {
+			alert("Error adding comment");
 			console.log(err);
 		});
 	};
