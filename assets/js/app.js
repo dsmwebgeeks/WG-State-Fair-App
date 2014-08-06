@@ -255,28 +255,34 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 		$http.post("/vendor/update", toUpdate)
 		.success(function(data) {
 			console.log(data);
+			if (data.error) {
+				alert(data.error);
+			}
 		}).error(function(err) {
 			console.log(err);
 		});
-		console.log(toUpdate);
 	}
 
 	$scope.toggleCategory = function(item) {
 		var categories = $scope.vendor.categories;
+		
+		if ($scope.userIsLoggedIn) {
+			for (cat in categories) {
+				if (cat === item && categories[cat] === true) {
+					categories[cat] = false;
 
-		for (cat in categories) {
-			if (cat === item && categories[cat] === true) {
-				categories[cat] = false;
+					sendUpdate(cat, categories[cat]);
 
-				sendUpdate(cat, categories[cat]);
+				} else if (cat === item && categories[cat] === false) {
+					categories[cat] = true;
 
-			} else if (cat === item && categories[cat] === false) {
-				categories[cat] = true;
-
-				sendUpdate(cat, categories[cat]);
+					sendUpdate(cat, categories[cat]);
+				}
 			}
+			setFilterState();
+		} else {
+			setFilterState();
 		}
-		setFilterState();
 	};
 
 
