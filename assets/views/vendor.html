@@ -26,6 +26,7 @@
 		</ul>
 	</div>
 
+	<em class="text-muted" ng-hide="userIsLoggedIn">Login to add a comment or change the category of the vendor</em>
 	<a href="/auth/twitter" class="btn btn-primary btn-block" ng-hide="userIsLoggedIn">Login via Twitter</a>
 
 	<form ng-submit="addComment()" ng-show="userIsLoggedIn">
