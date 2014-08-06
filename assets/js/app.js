@@ -71,13 +71,7 @@ app.controller("VendorsController", function($scope, $http, $location) {
 				lng: lng
 			};
 
-			// currentLocation = {
-			// 	lat: 41.59566,
-			// 	lng: -93.55255
-			// };
-
 			sortDistances(lat, lng);
-			// sortDistances(41.59566, -93.55255);
 		}
 
 		function sortDistances(lat, lng) {
@@ -272,8 +266,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.addComment = function() {
-		//$(".comments .list-group").prepend('<div class="list-group-item"><h4 class="list-group-item-heading">@'+$scope.username+'</h4><p class="list-group-item-text">'+$scope.comment+'</p></div>');
-
 		$http.post("/vendor/addcomment", {
 			vendor: $scope.itemId,
 			comment: $scope.comment
@@ -288,7 +280,6 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 
 
 	$scope.loadMap = function() {
-
 		// If Leaflet hasn't loaded, wait for it
 		if ( typeof(L) !== 'undefined' ) {
 			var map = L.map('leafletMap').setView([$scope.vendor.lat, $scope.vendor.lng], 18);
