@@ -321,5 +321,5 @@ app.controller("VendorController", function($scope, $http, $routeParams) {
 // Load CSS asychronously for slower connections (so users will still see content)
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
 
-loadCSS('http://fonts.googleapis.com/css?family=Ubuntu');
+loadCSS('/css/ubuntu.css');
 loadCSS('/css/font-awesome.min.css');
