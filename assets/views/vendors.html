@@ -11,20 +11,25 @@
 			</div>
 			<div id="filter-list" class="panel-collapse collapse">
 				<div class="panel-body">
-					<p>Select what types of food you'd like to find</p>
-					<div>
-						<label for="hasTurkey">Has Turkey</label>
-						<input type="checkbox" class="switch" name="hasTurkey" ng-model="filters.hasTurkey" ng-change="applyFilters()">
-					</div>
-					<div>
-						<label for="hasBeef">Has Beef</label>
-						<input type="checkbox" name="hasBeef" ng-model="filters.hasBeef" ng-change="applyFilters()">
-					</div>
-					<div>
-						<label for="campbells">Campbell's Con.</label>
-						<input type="checkbox" name="campbells" ng-model="filters.campbells" ng-change="applyFilters()">
-					</div>
+					<p>Select a category you'd like to find</p>
 
+					<ul class="list-inline">
+						<li class="active">
+							<button type="button" class="btn btn-default" ng-click="applyFilters('beer')">Beer</button>
+						</li>
+						<li class="disabled">
+							<button class="btn btn-default" ng-click="applyFilters('otherAlcohol')">Wine &amp; Sprite</button>
+						</li>
+						<li class="active">
+							<button class="btn btn-default" ng-click="applyFilters('oldFashioned')"> Old Fashioned</button>
+						</li>
+						<li class="active">
+							<button class="btn btn-default" ng-click="applyFilters('coke')"> Coke</button>
+						</li>
+						<li class="active">
+							<button class="btn btn-default" ng-click="applyFilters('pepsi')"> Pepsi</button>
+						</li>
+					</ul>
 				</div><!-- End panel body -->
 			</div>
 		</div>
@@ -33,8 +38,8 @@
 	<h1>Search Results</h1>
 	<em>Distances are absolute, and do not consider missing paths, walls, or stubborn people in the way.</em>
 
-	<div class="well bg-info" ng-show="sortingDistances"><i class="fa fa-refresh fa-spin"></i> Sorting by distance</div>
+	<div class="well bg-info" ng-show="sortingDistances"><i class="fa fa-refresh fa-spin"></i> Sorting by distance, please wait</div>
 	<ul class="list-search-results">
-		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}</a></li>
+		<li ng-repeat="vendor in vendors | orderBy: 'distance'"><a ng-href="#/vendor/{{vendor.id}}">{{vendor.name}}<br><small class="text-muted">{{vendor.landmark}}</small></a></li>
 	</ul>
 </div>
